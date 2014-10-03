@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections;
 
-public class GamePiece : MonoBehaviour {
+[System.Serializable]
+public class GamePiece {
 
-	public string gamePiece;
+	public string gamePieceName;
 	public int gamePieceID;
 	public Sprite gamePieceIcon;
 	public GameObject gamePieceModel;
@@ -16,9 +16,12 @@ public class GamePiece : MonoBehaviour {
 	}
 	public GamePiece(string name, int ID, PieceType type){
 
-		gamePiece = name;
+		gamePieceName = name;
 		gamePieceID = ID;
 		pieceType = type;
 		gamePieceIcon = Resources.Load<Sprite> ("" + name);
+	}
+	public GamePiece(){
+		gamePieceID = -1;
 	}
 }

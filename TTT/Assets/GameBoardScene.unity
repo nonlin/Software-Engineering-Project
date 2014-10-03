@@ -74,6 +74,46 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
+--- !u!1 &389045294
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 389045296}
+  - 114: {fileID: 389045295}
+  m_Layer: 0
+  m_Name: PieceDB
+  m_TagString: PieceDB
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &389045295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 389045294}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa0d8aa595fd73449a5febae0dcf60a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamePiece: []
+--- !u!4 &389045296
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 389045294}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 801.585327, y: 308.930084, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!1 &701524510
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +351,7 @@ GameObject:
   - 114: {fileID: 1996448231}
   m_Layer: 5
   m_Name: GameBoard
-  m_TagString: Untagged
+  m_TagString: GameBoard
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -372,4 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 432986e0bab33d44fac9b6d6cbdc154c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slot: {fileID: 100002, guid: bcdc70e5403cc3840bf7cb0e786403c2, type: 2}
+  slotsO: []
+  GamePieceList: []
+  slots: {fileID: 100002, guid: bcdc70e5403cc3840bf7cb0e786403c2, type: 2}
+  currentPlayer: 0
