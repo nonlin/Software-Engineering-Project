@@ -9,25 +9,34 @@ public class CreateGameBoard : MonoBehaviour {
 	public GameObject slots;
 	private PieceDB pieceDB;
 	public int currentPlayer;
-	int x = 180;
-	int y = 250;
+	//public GamePiece GamePieceCS;
+	public GameObject[,] aGrid = new GameObject[5,5];
+	int xPos = 180;
+	int yPos = 250;
 	// Use this for initialization
 	void Start () {
-	
+
 		int slotAmount = 0;
 		pieceDB = GameObject.FindGameObjectWithTag ("PieceDB").GetComponent<PieceDB> ();
-		for (int i = 0; i < 5; i++) {
+
+		for (int x = 0; x < 5; x++) {
 		
-			for(int j = 0; j <5; j++){
+			for(int y = 0; y <5; y++){
 
 				GameObject slot = (GameObject)Instantiate(slots);
+
 				slot.GetComponent<SlotScript>().slotNumber = slotAmount;
+				slot.GetComponent<SlotScript>().x = x;
+				slot.GetComponent<SlotScript>().y = y;
+
 				slot.name = slotAmount.ToString();// + ":Slot" + i + "-" + j;
-				Debug.Log (slot.name);
-				slotsO.Add(new GamePiece());
+				//Debug.Log (slot.name);
+				slotsO.Add(new GamePiece());//Might not need
 				GamePieceList.Add(new GamePiece());
+				aGrid[x,y] = slot;
+				//Debug.Log (aGrid[x,y].name);
 				slot.transform.parent = this.gameObject.transform;//Make it a child of this game object
-				slot.GetComponent<RectTransform>().localPosition = new Vector3(x - (i*105),y - (j*105),0);
+				slot.GetComponent<RectTransform>().localPosition = new Vector3(xPos - (x*105),yPos - (y*105),0);
 				slotAmount++;
 			}
 
@@ -41,7 +50,8 @@ public class CreateGameBoard : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
+		//CheckForWin ();
 	}
 
 
@@ -63,4 +73,5 @@ public class CreateGameBoard : MonoBehaviour {
 			}
 		}
 	}	
+
 }
