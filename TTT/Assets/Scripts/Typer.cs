@@ -5,13 +5,9 @@ using UnityEngine.UI;
 public class Typer : MonoBehaviour {
 	
 	public Text textComp;
-	private CreateGameBoard gameBoard;
 	public AudioClip keyEnter;
 	// Use this for initialization
 	void Start () {
-	
-		//StartCoroutine ("TypeIn",);
-		gameBoard = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<CreateGameBoard>();
 
 	}
 	
@@ -23,7 +19,7 @@ public class Typer : MonoBehaviour {
 	}
 
 	public IEnumerator TypeIn(string msg){
-		Debug.Log ("test"+msg);
+
 		yield return new WaitForSeconds(.5f);
 		for(int i = 0; i <msg.Length; i++){
 

@@ -14,7 +14,6 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	public int x;
 	public int y;
 	public int player;
-	public bool selectedColor = false;
 	// Use this for initialization
 	void Start () {
 	
@@ -40,9 +39,6 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 
 	public void OnPointerDown(PointerEventData data){
 
-		//Debug.Log (int.Parse(transform.name).ToString());
-		//Change Player Turn
-		selectedColor = true; 
 		if (gameBoard.GamePieceList[slotNumber].gamePieceName == null) {
 			slotNum = int.Parse(transform.name);
 			Debug.Log (gameBoard.currentPlayer);
@@ -64,11 +60,16 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 
 				Debug.Log ("Player " + player + " Won!");
 				gameBoard.ShowWinnerPrompt();
+
+				return;
 			}else if(gameBoard.moves >= 25){
 
 				Debug.Log ("TIE!");
 				gameBoard.ShowStaleMatePrompt();
-				StartCoroutine ("TiHighLight");
+				//This is how to call IEnumerators to have delayed functions
+				StartCoroutine ("TieHighLight");
+
+				return;
 			}
 
 			gameBoard.currentPlayer++;
@@ -79,10 +80,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 
 	//Game Logic
 	public bool CheckForWin(){
-		//Checks by weat
-		//SlotScript slotCS = slots.GetComponent<SlotScript> ();
-		//Debug.Log (slotCS.x + "," + slotCS.y);
-		//Debug.Log (x + "," + y);
+
 		//Row/Col Check
 		if (( GetPlayerSlotID(x,1) == (gameBoard.currentPlayer)) &&
 		    GetPlayerSlotID(x,2) == (gameBoard.currentPlayer) && 
@@ -170,52 +168,52 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			for(int j = 0; j < 5; j++)
 				switch(winID){
 				case 1:
-					if(gameBoard.aGrid[i,j].GetComponent<SlotScript>().selectedColor && GetPlayerSlotID(x,j) == gameBoard.currentPlayer){
+					if(GetPlayerSlotID(x,j) == gameBoard.currentPlayer){
 						gameBoard.aGrid [x, j].GetComponent<Image>().color = Color.green;
 					}
 					break;
 				case 2:
-					if(gameBoard.aGrid[i,j].GetComponent<SlotScript>().selectedColor && GetPlayerSlotID(i,y) == gameBoard.currentPlayer){
+					if(GetPlayerSlotID(i,y) == gameBoard.currentPlayer){
 						gameBoard.aGrid [i, y].GetComponent<Image>().color = Color.green;
 					}
 					break;
 				case 3:
-				if(gameBoard.aGrid[i,j].GetComponent<SlotScript>().selectedColor && GetPlayerSlotID(i,j) == gameBoard.currentPlayer && i == j){
+				if(GetPlayerSlotID(i,j) == gameBoard.currentPlayer && i == j){
 
 						gameBoard.aGrid [i, j].GetComponent<Image>().color = Color.green;
 						
 					}
 					break;
-				case 4:
-				if(gameBoard.aGrid[i,j].GetComponent<SlotScript>().selectedColor && GetPlayerSlotID(i,j) == gameBoard.currentPlayer && i == (j+1)){
+				case 4://Top Diag 
+				if(GetPlayerSlotID(i,j) == gameBoard.currentPlayer && i == (j+1)){
 					
 					gameBoard.aGrid [i, j].GetComponent<Image>().color = Color.green;
 					
 				}
 				break;
-				case 5:
-				if(gameBoard.aGrid[i,j].GetComponent<SlotScript>().selectedColor && GetPlayerSlotID(i,j) == gameBoard.currentPlayer && (i+1) == j){
+				case 5://Bot Diag
+				if(GetPlayerSlotID(i,j) == gameBoard.currentPlayer && (i+1) == j){
 					
 					gameBoard.aGrid [i, j].GetComponent<Image>().color = Color.green;
 					
 				}
 				break;
-				case 6:
-				if(gameBoard.aGrid[i,j].GetComponent<SlotScript>().selectedColor && GetPlayerSlotID(i,j) == gameBoard.currentPlayer && (gameBoard.GamePieceList[slotNumber+4].gamePieceID ==(gameBoard.currentPlayer-1) || gameBoard.GamePieceList[slotNumber-4].gamePieceID ==(gameBoard.currentPlayer-1))  ){
+				case 6://Mid Diag 2
+				if(GetPlayerSlotID(i,j) == gameBoard.currentPlayer &&  (((i==4 && j==0) || (i==0 && j==4)) || (i==3 && j==1) || (i==2 && j==2)|| (i==1 && j==3))){
 					
 					gameBoard.aGrid [i, j].GetComponent<Image>().color = Color.green;
 					
 				}
 				break;
-				case 7:
-				if(gameBoard.aGrid[i,j].GetComponent<SlotScript>().selectedColor && GetPlayerSlotID(i,j) == gameBoard.currentPlayer && gameBoard.GamePieceList[slotNumber+4].gamePieceID ==(gameBoard.currentPlayer-1)){
+				case 7://Top Diag 2
+				if(GetPlayerSlotID(i,j) == gameBoard.currentPlayer && ((i==3 && j==0) || (i==2 && j==1) || (i==1 && j==2) || (i==0 && j==3))){
 					//Only Slots with matching ID to Player
 					gameBoard.aGrid [i, j].GetComponent<Image>().color = Color.green;
 					
 				}
 				break;
 				case 8:
-				if(gameBoard.aGrid[i,j].GetComponent<SlotScript>().selectedColor && GetPlayerSlotID(i,j) == gameBoard.currentPlayer && i == (j-1)){
+				if(GetPlayerSlotID(i,j) == gameBoard.currentPlayer && i == (j-1)){
 					
 					gameBoard.aGrid [i, j].GetComponent<Image>().color = Color.green;
 					
@@ -227,12 +225,12 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 				}
 		
 	}
-	public IEnumerator TiHighLight(){
+	public IEnumerator TieHighLight(){
 		for(int i = 0; i < 5; i++)
 			for(int j = 0; j < 5; j++){
 				yield return new WaitForSeconds(.5f);
 				gameBoard.aGrid[i,j].GetComponent<Image>().color = Color.blue;
 		}
+		gameBoard.GetComponent<SlotScript>().enabled = false;
 	}
-	
 }
