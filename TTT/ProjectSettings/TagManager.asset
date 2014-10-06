@@ -5,6 +5,9 @@ TagManager:
   tags:
   - PieceDB
   - GameBoard
+  - Canvas
+  - MenuManager
+  - Prompt
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

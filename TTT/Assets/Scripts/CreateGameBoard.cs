@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;//allows to reach the UI image 
 
 public class CreateGameBoard : MonoBehaviour {
 
@@ -9,16 +10,18 @@ public class CreateGameBoard : MonoBehaviour {
 	public GameObject slots;
 	private PieceDB pieceDB;
 	public int currentPlayer;
-	//public GamePiece GamePieceCS;
+	public int moves;
 	public GameObject[,] aGrid = new GameObject[5,5];
-	int xPos = 180;
-	int yPos = 250;
+	private int xPos = 180;
+	private int yPos = 250;
+	//public string prompt;
+	private Typer typerCS;
 	// Use this for initialization
 	void Start () {
 
 		int slotAmount = 0;
 		pieceDB = GameObject.FindGameObjectWithTag ("PieceDB").GetComponent<PieceDB> ();
-
+		typerCS = GameObject.FindGameObjectWithTag ("Prompt").GetComponent<Typer> ();
 		for (int x = 0; x < 5; x++) {
 		
 			for(int y = 0; y <5; y++){
@@ -54,7 +57,6 @@ public class CreateGameBoard : MonoBehaviour {
 		//CheckForWin ();
 	}
 
-
 	public void AddPiece(int id,int slotNum){
 
 		for (int i = 0; i < GamePieceList.Count; i++) {
@@ -73,5 +75,20 @@ public class CreateGameBoard : MonoBehaviour {
 			}
 		}
 	}	
+	public void ShowWinnerPrompt(){
+		
+		if(currentPlayer == 1)
+		{
+			//prompt = "X gets 4 in a row. Player 1 wins!";
+			typerCS.startCR("X gets 4 in a row. Player 1 wins!");
+		} else {
+			typerCS.startCR("O gets 4 in a row. Player 2 wins!");
+			//prompt = "O gets 4 in a row. Player 2 wins!";
+		}
+	}
 
+	public void ShowStaleMatePrompt(){
+
+		typerCS.startCR("It's A DRAW!!");
+	}
 }

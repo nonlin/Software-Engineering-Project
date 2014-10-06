@@ -46,7 +46,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ef4334e877e5c459eecae0d7267efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gamePiece: {fileID: 0}
+  gamePiece:
+    gamePieceName: 
+    gamePieceID: -1
+    gamePieceIcon: {fileID: 0}
+    gamePieceModel: {fileID: 0}
+    pieceType: 0
+  slotNumber: 0
+  gameBoard: {fileID: 0}
+  x: 0
+  y: 0
+  player: 0
+  prompt: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

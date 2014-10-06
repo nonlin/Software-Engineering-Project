@@ -27,4 +27,5 @@ public class MenuManager : MonoBehaviour {
 		menuAnim.SetBool("show",false);
 	}
 
+
 }

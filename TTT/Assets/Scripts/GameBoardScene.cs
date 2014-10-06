@@ -3,7 +3,16 @@ using System.Collections;
 
 public class GameBoardScene : MonoBehaviour {
 
-	public void ChangeToScene(int sceneToChangeTo){
-		Application.LoadLevel (sceneToChangeTo);
+	private MenuManager mmScript;
+	private int sceneInt;
+	void Start(){
+
+		mmScript = GameObject.FindGameObjectWithTag ("Canvas").GetComponent<MenuManager> ();
+
+	}
+	public void ChangeToScene(){
+
+		Application.LoadLevel (1);
+	
 	}
 }
