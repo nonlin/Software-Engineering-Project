@@ -231,6 +231,6 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 				yield return new WaitForSeconds(.5f);
 				gameBoard.aGrid[i,j].GetComponent<Image>().color = Color.blue;
 		}
-		gameBoard.GetComponent<SlotScript>().enabled = false;
+		//gameBoard.GetComponent<SlotScript>().enabled = false;
 	}
 }

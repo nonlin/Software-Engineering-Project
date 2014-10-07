@@ -6,7 +6,7 @@ public class MenuManager : MonoBehaviour {
 	
 	private Animator menuAnim;
 	private bool showDifficulty = false; 
-
+	//private int volLvl = 1.0f;
 	// Use this for initialization
 	void Start () {
 		

@@ -1,18 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.EventSystems;
 
-public class GameBoardScene : MonoBehaviour {
+public class GameBoardScene : MonoBehaviour, IPointerDownHandler {
 
 //	private MenuManager mmScript;
-	private int sceneInt;
+	public int sceneInt;
 	void Start(){
 
 		//mmScript = GameObject.FindGameObjectWithTag ("Canvas").GetComponent<MenuManager> ();
 
 	}
-	public void ChangeToScene(){
+	public void ChangeToScene(int sceneToChangeTo){
 
-		Application.LoadLevel (1);
-	
+		sceneInt = sceneToChangeTo;	
+	}
+
+	public void OnPointerDown(PointerEventData data){
+
+		Application.LoadLevel (sceneInt);
 	}
 }

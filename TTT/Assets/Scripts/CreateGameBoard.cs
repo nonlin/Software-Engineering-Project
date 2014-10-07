@@ -89,6 +89,6 @@ public class CreateGameBoard : MonoBehaviour {
 
 	public void ShowStaleMatePrompt(){
 
-		typerCS.startCR("It's A DRAW!!");
+		typerCS.startCR("Its A DRAW!!");
 	}
 }

@@ -57,7 +57,6 @@ MonoBehaviour:
   x: 0
   y: 0
   player: 0
-  prompt: {fileID: 0}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -91,7 +90,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: .617647052, g: .41327855, b: .41327855, a: 1}
+  m_Color: {r: .00784313772, g: .243137255, b: .647058845, a: .909803927}
   m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
   m_Type: 1
   m_PreserveAspect: 0
