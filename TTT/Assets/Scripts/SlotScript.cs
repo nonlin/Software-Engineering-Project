@@ -212,8 +212,8 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 					
 				}
 				break;
-				case 8:
-				if(GetPlayerSlotID(i,j) == gameBoard.currentPlayer && i == (j-1)){
+				case 8://Bot Diag 2
+				if(GetPlayerSlotID(i,j) == gameBoard.currentPlayer && ((i==4 && j==1) || (i==3 && j==2) || (i==2 && j==3) || (i==1 && j==4))){
 					
 					gameBoard.aGrid [i, j].GetComponent<Image>().color = Color.green;
 					
