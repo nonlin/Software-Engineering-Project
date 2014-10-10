@@ -27,6 +27,9 @@ public class Typer : MonoBehaviour {
 			this.GetComponent<AudioSource>().PlayOneShot(keyEnter);
 			yield return new WaitForSeconds(0.1f);
 		}
+		//yield return new WaitForSeconds(3);
+		//DestroyObject(GameObject.FindGameObjectWithTag("GameMaster"));
+		//Application.LoadLevel(0);
 
 	}
 	public void startCR(string msg){

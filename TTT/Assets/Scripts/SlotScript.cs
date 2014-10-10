@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine.UI;//allows to reach the UI image 
 using UnityEngine.EventSystems;
+using System.Collections.Generic;
 
 public class SlotScript : MonoBehaviour, IPointerDownHandler {
 
@@ -9,6 +10,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	private Image gamePieceImage;
 	public int slotNumber;
 	public CreateGameBoard gameBoard;
+	private GameMaster GMO;
 	private int slotNum;
 	private string[] slotNumString;
 	public int x;
@@ -16,10 +18,12 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	public int player;
 	// Use this for initialization
 	void Start () {
-	
+
+		player = 0;
+		GMO = GameObject.FindGameObjectWithTag ("GameMaster").GetComponent<GameMaster>();
 		gameBoard = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<CreateGameBoard>();
 		gamePieceImage = gameObject.transform.GetChild (0).GetComponent<Image> ();
-		gameBoard.currentPlayer = 1;
+		//gameBoard.currentPlayer = 1;
 	}
 	
 	// Update is called once per frame
@@ -38,44 +42,16 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	}
 
 	public void OnPointerDown(PointerEventData data){
+		//Prevents double clicking in the same slot. 
+		if (gameBoard.GamePieceList [slotNumber].gamePieceName == null) {
 
-		if (gameBoard.GamePieceList[slotNumber].gamePieceName == null) {
-			slotNum = int.Parse(transform.name);
-			Debug.Log (gameBoard.currentPlayer);
+			PlacePiece(false,this.gameObject);
+			if(!CheckForWin() && !(gameBoard.moves > 24)){
 
-			if(gameBoard.currentPlayer == 1){
-		
-				gameBoard.AddPiece (0,slotNum);
-
-
-			}
-			else{
-				gameBoard.AddPiece (1,slotNum);
-
-			}
-			gameBoard.moves++;
-			//Update player to currentplayer to make CheckWin Check correct player set
-			player = gameBoard.currentPlayer;
-			if(CheckForWin ()){
-
-				Debug.Log ("Player " + player + " Won!");
-				gameBoard.ShowWinnerPrompt();
-
-				return;
-			}else if(gameBoard.moves >= 25){
-
-				Debug.Log ("TIE!");
-				gameBoard.ShowStaleMatePrompt();
-				//This is how to call IEnumerators to have delayed functions
-				StartCoroutine ("TieHighLight");
-
-				return;
+				EasyAI();
 			}
 
-			gameBoard.currentPlayer++;
-			if(gameBoard.currentPlayer > 2)
-				gameBoard.currentPlayer = 1;
-		}
+		}	
 	}
 
 	//Game Logic
@@ -159,6 +135,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 
 	public int GetPlayerSlotID(int x, int y){
 
+		//Debug.Log ("aGrid Player:"+gameBoard.aGrid [x, y].GetComponent<SlotScript> ().player+" at "+x+"-"+y);
 		return gameBoard.aGrid [x, y].GetComponent<SlotScript> ().player;
 	}
 
@@ -233,4 +210,71 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		}
 		//gameBoard.GetComponent<SlotScript>().enabled = false;
 	}
+	public void EasyAI(){
+
+		List<GameObject> emptySlots = new List<GameObject> ();
+		GameObject slot;
+		for(int i = 0; i < 5; i++)
+			for(int j = 0; j < 5; j++){
+			//slot can be any slot from the grid
+			slot = gameBoard.aGrid[i,j];
+			//if slot is empty aka no player assigned
+			if(slot.GetComponent<SlotScript> ().player == 0){
+				//add the empty slot to a list of empty slots
+				emptySlots.Add (slot);
+			}
+		}
+		//then set the slot equal to some empty slot from the list of empty slots available
+		slot = emptySlots [Random.Range (0, emptySlots.Count)];
+		//get the slot number via the name and store it in npcPiece
+		gameBoard.npcPiece = int.Parse(slot.GetComponent<SlotScript>().name);
+		PlacePiece(true,slot);
+		CheckForWin ();
+	}
+
+	void PlacePiece(bool turnAIOn, GameObject slot){
+
+		if (GMO.aiDiffID == 1 && turnAIOn) {
+			Debug.Log ("NPC SLOTNUM"+gameBoard.npcPiece);
+			gameBoard.AddPiece (1, gameBoard.npcPiece);
+			Debug.Log ("Move Count:" +gameBoard.moves);
+			//Debug.Log();
+		} 
+	//	if (gameBoard.GamePieceList [slotNumber].gamePieceName == null) {
+			slotNum = int.Parse (transform.name);
+			Debug.Log ("Current Player"+gameBoard.currentPlayer);
+
+
+			if (gameBoard.currentPlayer == 1) {
+					
+				gameBoard.AddPiece (0, slotNum);
+			} else if (GMO.aiDiffID == 0) {
+
+				gameBoard.AddPiece (1, slotNum);
+			} 
+
+			gameBoard.moves++;
+			slot.GetComponent<SlotScript>().player = gameBoard.currentPlayer;
+			//player = gameBoard.currentPlayer;
+			if (CheckForWin ()) {
+
+					Debug.Log ("Player " + player + " Won!");
+					gameBoard.ShowWinnerPrompt ();
+
+					return;
+			} else if (gameBoard.moves >= 25) {
+
+					Debug.Log ("TIE!");
+					gameBoard.ShowStaleMatePrompt ();
+					//This is how to call IEnumerators to have delayed functions
+					StartCoroutine ("TieHighLight");
+
+					return;
+			}
+
+			gameBoard.currentPlayer++;
+			if (gameBoard.currentPlayer > 2)
+					gameBoard.currentPlayer = 1;
+		}
+	//}
 }

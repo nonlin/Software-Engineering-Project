@@ -8,9 +8,12 @@ public class CreateGameBoard : MonoBehaviour {
 	public List<GamePiece> slotsO = new List<GamePiece>();
 	public List<GamePiece> GamePieceList = new List<GamePiece> ();
 	public GameObject slots;
+	public GameObject slot;
 	private PieceDB pieceDB;
 	public int currentPlayer;
 	public int moves;
+	public int npcPiece; 
+	public int slotAmount;
 	public GameObject[,] aGrid = new GameObject[5,5];
 	private int xPos = 180;
 	private int yPos = 250;
@@ -18,15 +21,15 @@ public class CreateGameBoard : MonoBehaviour {
 	private Typer typerCS;
 	// Use this for initialization
 	void Start () {
-
-		int slotAmount = 0;
+		currentPlayer = 1;
+		slotAmount = 0;
 		pieceDB = GameObject.FindGameObjectWithTag ("PieceDB").GetComponent<PieceDB> ();
 		typerCS = GameObject.FindGameObjectWithTag ("Prompt").GetComponent<Typer> ();
 		for (int x = 0; x < 5; x++) {
 		
 			for(int y = 0; y <5; y++){
 
-				GameObject slot = (GameObject)Instantiate(slots);
+				slot = (GameObject)Instantiate(slots);
 
 				slot.GetComponent<SlotScript>().slotNumber = slotAmount;
 				slot.GetComponent<SlotScript>().x = x;
@@ -34,7 +37,7 @@ public class CreateGameBoard : MonoBehaviour {
 
 				slot.name = slotAmount.ToString();// + ":Slot" + i + "-" + j;
 				//Debug.Log (slot.name);
-				slotsO.Add(new GamePiece());//Might not need
+				//slotsO.Add(new GamePiece());//Might not need
 				GamePieceList.Add(new GamePiece());
 				aGrid[x,y] = slot;
 				//Debug.Log (aGrid[x,y].name);
@@ -91,4 +94,5 @@ public class CreateGameBoard : MonoBehaviour {
 
 		typerCS.startCR("Its A DRAW!!");
 	}
+
 }

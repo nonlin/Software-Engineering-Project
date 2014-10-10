@@ -10,6 +10,10 @@ TagManager:
   - Prompt
   - SinglePlayer
   - MultiPlayer
+  - AIDiffE
+  - AIDiffM
+  - AIDiffH
+  - GameMaster
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

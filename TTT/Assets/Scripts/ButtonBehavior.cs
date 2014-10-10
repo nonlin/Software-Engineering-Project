@@ -7,15 +7,23 @@ public class ButtonBehavior : MonoBehaviour,IPointerDownHandler {
 
 	private GameObject SinglePlayer;
 	private GameObject MultiPlayer;
-	public bool isSingle;
-	public bool isMulti;
+	private GameObject aiSelectE, aiSelectM, aiSelectH;
+	public bool isSingle, isMulti;
+	private bool isEasy, isMed, isHard;
+
 	// Use this for initialization
 	void Start () {
 	
 		isSingle = false;
 		isMulti = false;
+		isEasy = false;
+		isHard = false;
+		isMed = false;
 		SinglePlayer = GameObject.FindGameObjectWithTag ("SinglePlayer");
 		MultiPlayer = GameObject.FindGameObjectWithTag ("MultiPlayer");
+		aiSelectE = GameObject.FindGameObjectWithTag ("AIDiffE");
+		aiSelectM = GameObject.FindGameObjectWithTag ("AIDiffM");
+		aiSelectH = GameObject.FindGameObjectWithTag ("AIDiffH");
 	}
 	
 	// Update is called once per frame
@@ -42,5 +50,40 @@ public class ButtonBehavior : MonoBehaviour,IPointerDownHandler {
 			SinglePlayer.GetComponent<Image>().color = Color.white;
 		}
 		Debug.Log (isSingle + "-" + isMulti);
+		Debug.Log (gameObject.tag);
+		//AI buttons
+		if (gameObject == aiSelectE) {
+		
+			isEasy = true;
+			isMed = false;
+			isHard = false;
+		}
+		if (gameObject == aiSelectM) {
+			
+			isEasy = false;
+			isMed = true;
+			isHard = false;
+		}
+		if (gameObject == aiSelectH) {
+			
+			isEasy = false;
+			isMed = false;
+			isHard = true;
+		}
+		if (isEasy) {
+			gameObject.GetComponent<Image>().color = Color.green;
+			aiSelectM.GetComponent<Image>().color = Color.white;
+			aiSelectH.GetComponent<Image>().color = Color.white;
+		}
+		if (isMed) {
+			gameObject.GetComponent<Image>().color = Color.blue;
+			aiSelectE.GetComponent<Image>().color = Color.white;
+			aiSelectH.GetComponent<Image>().color = Color.white;
+		}
+		if (isHard) {
+			gameObject.GetComponent<Image>().color = Color.red;
+			aiSelectM.GetComponent<Image>().color = Color.white;
+			aiSelectE.GetComponent<Image>().color = Color.white;
+		}
 	}
 }
