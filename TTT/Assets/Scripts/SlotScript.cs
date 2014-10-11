@@ -16,6 +16,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	public int x;
 	public int y;
 	public int player;
+	public bool gameOver = false; 
 	// Use this for initialization
 	void Start () {
 
@@ -46,35 +47,35 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		if (gameBoard.GamePieceList [slotNumber].gamePieceName == null) {
 
 			PlacePiece(false,this.gameObject);
-			if(!CheckForWin() && !(gameBoard.moves > 24)){
+			if(!gameOver){
 
 				EasyAI();
 			}
-
 		}	
 	}
 
 	//Game Logic
-	public bool CheckForWin(){
-
+	public bool CheckForWin(GameObject slot){
+		Debug.Log ("Entered Check Win");
+		SlotScript slotCS = slot.GetComponent<SlotScript> ();
 		//Row/Col Check
-		if (( GetPlayerSlotID(x,1) == (gameBoard.currentPlayer)) &&
-		    GetPlayerSlotID(x,2) == (gameBoard.currentPlayer) && 
-		    GetPlayerSlotID(x,3) == (gameBoard.currentPlayer) && 
-		    (GetPlayerSlotID(x,4) == (gameBoard.currentPlayer) || 
-		 	GetPlayerSlotID(x,0) == (gameBoard.currentPlayer))){
+		if (( GetPlayerSlotID(slotCS.x,1) == (gameBoard.currentPlayer)) &&
+		    GetPlayerSlotID(slotCS.x,2) == (gameBoard.currentPlayer) && 
+		    GetPlayerSlotID(slotCS.x,3) == (gameBoard.currentPlayer) && 
+		    (GetPlayerSlotID(slotCS.x,4) == (gameBoard.currentPlayer) || 
+		 GetPlayerSlotID(slotCS.x,0) == (gameBoard.currentPlayer))){
 			Debug.Log ("Col Sat" + gameBoard.currentPlayer);
-			HighlightWin(1);
+			HighlightWin(1,slot);
 				
 			return true; 
 		}
-		if ((GetPlayerSlotID(1,y) == (gameBoard.currentPlayer)) &&
-		    GetPlayerSlotID(2,y) == (gameBoard.currentPlayer) && 
-		    GetPlayerSlotID(3,y) == (gameBoard.currentPlayer)&& 
-		    (GetPlayerSlotID(4,y) == (gameBoard.currentPlayer) || 
-		 	GetPlayerSlotID(0,y) == (gameBoard.currentPlayer))){
+		if ((GetPlayerSlotID(1,slotCS.y) == (gameBoard.currentPlayer)) &&
+		    GetPlayerSlotID(2,slotCS.y) == (gameBoard.currentPlayer) && 
+		    GetPlayerSlotID(3,slotCS.y) == (gameBoard.currentPlayer)&& 
+		    (GetPlayerSlotID(4,slotCS.y) == (gameBoard.currentPlayer) || 
+		 	GetPlayerSlotID(0,slotCS.y) == (gameBoard.currentPlayer))){
 			Debug.Log ("Row Sat");
-			HighlightWin(2);
+			HighlightWin(2,slot);
 			return true; 
 		}
 		//Diag Cross 1
@@ -84,7 +85,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		   GetPlayerSlotID(2,2) == (gameBoard.currentPlayer) &&
 		   GetPlayerSlotID(3,3) == (gameBoard.currentPlayer)){
 			Debug.Log ("Mid Diag Sat");
-			HighlightWin(3);
+			HighlightWin(3,slot);
 			return true;
 		}
 		if((GetPlayerSlotID(1,0) == (gameBoard.currentPlayer) && 
@@ -92,7 +93,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		   GetPlayerSlotID(3,2) == (gameBoard.currentPlayer) &&
 		   GetPlayerSlotID(4,3) == (gameBoard.currentPlayer)){
 			Debug.Log ("Top Diag Sat");
-			HighlightWin(4);
+			HighlightWin(4,slot);
 			return true;
 		}
 		if((GetPlayerSlotID(0,1) == (gameBoard.currentPlayer) && 
@@ -100,7 +101,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		   GetPlayerSlotID(2,3) == (gameBoard.currentPlayer) &&
 		   GetPlayerSlotID(3,4) == (gameBoard.currentPlayer)){
 			Debug.Log ("Bot Diag Sat");
-			HighlightWin(5);
+			HighlightWin(5,slot);
 			return true;
 		}
 		//Diag Cross 2
@@ -110,7 +111,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		   GetPlayerSlotID(2,2) == (gameBoard.currentPlayer) &&
 		   GetPlayerSlotID(1,3) == (gameBoard.currentPlayer)){
 			Debug.Log ("Mid Diag 2 Sat");
-			HighlightWin(6);
+			HighlightWin(6,slot);
 			return true;
 		}
 		if((GetPlayerSlotID(3,0) == (gameBoard.currentPlayer) && 
@@ -118,7 +119,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		   GetPlayerSlotID(1,2) == (gameBoard.currentPlayer) &&
 		   GetPlayerSlotID(0,3) == (gameBoard.currentPlayer)){
 			Debug.Log ("Top Diag 2 Sat");
-			HighlightWin(7);
+			HighlightWin(7,slot);
 			return true;
 		}
 		if((GetPlayerSlotID(4,1) == (gameBoard.currentPlayer) && 
@@ -126,7 +127,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		   GetPlayerSlotID(2,3) == (gameBoard.currentPlayer) &&
 		   GetPlayerSlotID(1,4) == (gameBoard.currentPlayer)){
 			Debug.Log ("Bot Diag 2 Sat");
-			HighlightWin(8);
+			HighlightWin(8,slot);
 			
 			return true;
 		}
@@ -139,19 +140,20 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		return gameBoard.aGrid [x, y].GetComponent<SlotScript> ().player;
 	}
 
-	void HighlightWin(int winID){
+	void HighlightWin(int winID, GameObject slot){
 
+		SlotScript slotCS = slot.GetComponent<SlotScript> ();
 		for(int i = 0; i < 5; i++)
 			for(int j = 0; j < 5; j++)
 				switch(winID){
 				case 1:
-					if(GetPlayerSlotID(x,j) == gameBoard.currentPlayer){
-						gameBoard.aGrid [x, j].GetComponent<Image>().color = Color.green;
+				if(GetPlayerSlotID(slotCS.x,j) == gameBoard.currentPlayer){
+					gameBoard.aGrid [slotCS.x, j].GetComponent<Image>().color = Color.green;
 					}
 					break;
 				case 2:
-					if(GetPlayerSlotID(i,y) == gameBoard.currentPlayer){
-						gameBoard.aGrid [i, y].GetComponent<Image>().color = Color.green;
+				if(GetPlayerSlotID(i,slotCS.y) == gameBoard.currentPlayer){
+					gameBoard.aGrid [i, slotCS.y].GetComponent<Image>().color = Color.green;
 					}
 					break;
 				case 3:
@@ -229,18 +231,18 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		//get the slot number via the name and store it in npcPiece
 		gameBoard.npcPiece = int.Parse(slot.GetComponent<SlotScript>().name);
 		PlacePiece(true,slot);
-		CheckForWin ();
 	}
 
 	void PlacePiece(bool turnAIOn, GameObject slot){
 
+		//For AI Logic
 		if (GMO.aiDiffID == 1 && turnAIOn) {
 			Debug.Log ("NPC SLOTNUM"+gameBoard.npcPiece);
 			gameBoard.AddPiece (1, gameBoard.npcPiece);
-			Debug.Log ("Move Count:" +gameBoard.moves);
-			//Debug.Log();
+			TurnSwitch(slot);
 		} 
-	//	if (gameBoard.GamePieceList [slotNumber].gamePieceName == null) {
+		//For Two Player Logic
+		if (gameBoard.GamePieceList [slotNumber].gamePieceName == null) {
 			slotNum = int.Parse (transform.name);
 			Debug.Log ("Current Player"+gameBoard.currentPlayer);
 
@@ -254,27 +256,32 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			} 
 
 			gameBoard.moves++;
-			slot.GetComponent<SlotScript>().player = gameBoard.currentPlayer;
-			//player = gameBoard.currentPlayer;
-			if (CheckForWin ()) {
-
-					Debug.Log ("Player " + player + " Won!");
-					gameBoard.ShowWinnerPrompt ();
-
-					return;
-			} else if (gameBoard.moves >= 25) {
-
-					Debug.Log ("TIE!");
-					gameBoard.ShowStaleMatePrompt ();
-					//This is how to call IEnumerators to have delayed functions
-					StartCoroutine ("TieHighLight");
-
-					return;
-			}
-
-			gameBoard.currentPlayer++;
-			if (gameBoard.currentPlayer > 2)
-					gameBoard.currentPlayer = 1;
+			TurnSwitch(slot);
 		}
-	//}
+	}
+
+	void TurnSwitch(GameObject slot){
+		
+		slot.GetComponent<SlotScript>().player = gameBoard.currentPlayer;
+		//player = gameBoard.currentPlayer;
+		if (CheckForWin (slot)) {
+			gameOver = true;
+			Debug.Log ("Player " + slot.GetComponent<SlotScript>().player + " Won!");
+			gameBoard.ShowWinnerPrompt ();
+			
+			return;
+		} else if (gameBoard.moves >= 25) {
+			gameOver = true;
+			Debug.Log ("TIE!");
+			gameBoard.ShowStaleMatePrompt ();
+			//This is how to call IEnumerators to have delayed functions
+			StartCoroutine ("TieHighLight");
+			
+			return;
+		}
+		
+		gameBoard.currentPlayer++;
+		if (gameBoard.currentPlayer > 2)
+			gameBoard.currentPlayer = 1;
+	}
 }
