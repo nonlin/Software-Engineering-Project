@@ -19,8 +19,13 @@ public class CreateGameBoard : MonoBehaviour {
 	private int yPos = 250;
 	//public string prompt;
 	private Typer typerCS;
+	public bool gameOver = false;
+	public int difficultyX;
+	public int totalScore;
+	public int currentScore;
 	// Use this for initialization
 	void Start () {
+		//totalScore = difficultyX * 25 * 50;
 		currentPlayer = 1;
 		slotAmount = 0;
 		pieceDB = GameObject.FindGameObjectWithTag ("PieceDB").GetComponent<PieceDB> ();
@@ -47,17 +52,11 @@ public class CreateGameBoard : MonoBehaviour {
 			}
 
 		}
-		//AddPiece (0);
-		//AddPiece (1);
-		//Debug.Log (GamePieceList [0].gamePieceName);
-		//Debug.Log (GamePieceList [1].gamePieceName);
-		//Debug.Log (GamePieceList.Count);
 	}
 	
 	// Update is called once per frame
 	void Update () {
 
-		//CheckForWin ();
 	}
 
 	public void AddPiece(int id,int slotNum){
@@ -88,6 +87,7 @@ public class CreateGameBoard : MonoBehaviour {
 			typerCS.startCR("O gets 4 in a row. Player 2 wins!");
 			//prompt = "O gets 4 in a row. Player 2 wins!";
 		}
+
 	}
 
 	public void ShowStaleMatePrompt(){

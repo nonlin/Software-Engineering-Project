@@ -23,10 +23,11 @@ public class MenuManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 	
 	public void showAI(){
 
-			menuAnim.SetBool("show",true);
+		menuAnim.SetBool("show",true);
 	}
 
 	public void hideAI(){
+
 		menuAnim.SetBool("show",false);
 	}
 
@@ -39,4 +40,8 @@ public class MenuManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
 		menuAnim.SetBool ("showOp", false);
 	}
+
+	public void showScoreBoard(){menuAnim.SetBool("show",true);}
+
+	public void hideScoreBoard(){menuAnim.SetBool("show",false);}
 }

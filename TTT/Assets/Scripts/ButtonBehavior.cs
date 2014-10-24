@@ -7,8 +7,9 @@ public class ButtonBehavior : MonoBehaviour,IPointerDownHandler {
 
 	private GameObject SinglePlayer;
 	private GameObject MultiPlayer;
+	private GameObject ScoreBoard;
 	private GameObject aiSelectE, aiSelectM, aiSelectH;
-	public bool isSingle, isMulti;
+	public bool isSingle, isMulti,isScore;
 	private bool isEasy, isMed, isHard;
 
 	// Use this for initialization
@@ -19,11 +20,15 @@ public class ButtonBehavior : MonoBehaviour,IPointerDownHandler {
 		isEasy = false;
 		isHard = false;
 		isMed = false;
+		isScore = false;
+		//Get GameObject via its tag
 		SinglePlayer = GameObject.FindGameObjectWithTag ("SinglePlayer");
 		MultiPlayer = GameObject.FindGameObjectWithTag ("MultiPlayer");
+		ScoreBoard = GameObject.FindGameObjectWithTag("ScoreBoard");
 		aiSelectE = GameObject.FindGameObjectWithTag ("AIDiffE");
 		aiSelectM = GameObject.FindGameObjectWithTag ("AIDiffM");
 		aiSelectH = GameObject.FindGameObjectWithTag ("AIDiffH");
+
 	}
 	
 	// Update is called once per frame
@@ -32,25 +37,40 @@ public class ButtonBehavior : MonoBehaviour,IPointerDownHandler {
 	}
 
 	public void OnPointerDown(PointerEventData data){
-
+		//Find the gameobject user is selecting on click and make it true and others false
 		if (gameObject ==  SinglePlayer) {
 			isSingle = true;
-			isMulti = false;		
+			isMulti = false;	
+			isScore = false;
 		}
 		else if (gameObject ==  MultiPlayer){
 			isMulti = true;
 			isSingle = false; 
+			isScore = false;
 		}
+		else if (gameObject == ScoreBoard){
+			isMulti = false;
+			isSingle = false;
+			isScore = true;
+		}
+		//Once we know if its true we can toggle the colors of the button so that they look selected or not.
 		if(isSingle){
 			gameObject.GetComponent<Image>().color = Color.green;
 			MultiPlayer.GetComponent<Image>().color = Color.white;
+			ScoreBoard.GetComponent<Image>().color = Color.white;
 		}
 		if(isMulti){
 			gameObject.GetComponent<Image>().color = Color.green;
 			SinglePlayer.GetComponent<Image>().color = Color.white;
+			ScoreBoard.GetComponent<Image>().color = Color.white;
 		}
-		Debug.Log (isSingle + "-" + isMulti);
-		Debug.Log (gameObject.tag);
+		if (isScore) {
+			gameObject.GetComponent<Image>().color = Color.green;
+			SinglePlayer.GetComponent<Image>().color = Color.white;	
+			MultiPlayer.GetComponent<Image>().color = Color.white;
+		}
+		//Debug.Log (isSingle + "-" + isMulti);
+		//Debug.Log (gameObject.tag);
 		//AI buttons
 		if (gameObject == aiSelectE) {
 		

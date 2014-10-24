@@ -16,7 +16,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	public int x;
 	public int y;
 	public int player;
-	public bool gameOver = false; 
+	 
 	// Use this for initialization
 	void Start () {
 
@@ -24,14 +24,13 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		GMO = GameObject.FindGameObjectWithTag ("GameMaster").GetComponent<GameMaster>();
 		gameBoard = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<CreateGameBoard>();
 		gamePieceImage = gameObject.transform.GetChild (0).GetComponent<Image> ();
-		//gameBoard.currentPlayer = 1;
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		//Make sure only non empty slots display an icon. 
 		if (gameBoard.GamePieceList[slotNumber].gamePieceName != null) {
-
+			ScoreSystem();
 			gamePiece = gameBoard.GamePieceList[slotNumber];
 			gamePieceImage.enabled = true;
 			gamePieceImage.sprite = gameBoard.GamePieceList[slotNumber].gamePieceIcon;
@@ -43,15 +42,22 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	}
 
 	public void OnPointerDown(PointerEventData data){
-		//Prevents double clicking in the same slot. 
-		if (gameBoard.GamePieceList [slotNumber].gamePieceName == null) {
+		//User can't click when game is over.
+		if(!gameBoard.gameOver){
 
-			PlacePiece(false,this.gameObject);
-			if(!gameOver){
+			//Prevent Click Spamming in the case of "Thinking NPC"
+			if(gameBoard.gameOver || gameBoard.currentPlayer == 2) return;
+			//Prevents double clicking in the same slot. 
+			if (gameBoard.GamePieceList [slotNumber].gamePieceName == null) {
+				//User's Place Piece is called with AI off. 
+				PlacePiece(false,this.gameObject);
+				//Don't have AI play if Player Wins
+				if(!gameBoard.gameOver){
 
-				EasyAI();
-			}
-		}	
+					EasyAI();
+				}
+			}	
+		}
 	}
 
 	//Game Logic
@@ -214,6 +220,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	}
 	public void EasyAI(){
 
+		gameBoard.difficultyX = 5;
 		List<GameObject> emptySlots = new List<GameObject> ();
 		GameObject slot;
 		for(int i = 0; i < 5; i++)
@@ -261,17 +268,18 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	}
 
 	void TurnSwitch(GameObject slot){
-		
+		//Update Slot Player Info With the Current Player
 		slot.GetComponent<SlotScript>().player = gameBoard.currentPlayer;
-		//player = gameBoard.currentPlayer;
+		//Check for Win Every Turn
 		if (CheckForWin (slot)) {
-			gameOver = true;
+
+			gameBoard.gameOver = true;
 			Debug.Log ("Player " + slot.GetComponent<SlotScript>().player + " Won!");
 			gameBoard.ShowWinnerPrompt ();
 			
 			return;
 		} else if (gameBoard.moves >= 25) {
-			gameOver = true;
+			gameBoard.gameOver = true;
 			Debug.Log ("TIE!");
 			gameBoard.ShowStaleMatePrompt ();
 			//This is how to call IEnumerators to have delayed functions
@@ -283,5 +291,17 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		gameBoard.currentPlayer++;
 		if (gameBoard.currentPlayer > 2)
 			gameBoard.currentPlayer = 1;
+	}
+
+	void ScoreSystem(){
+
+		gameBoard.totalScore = gameBoard.difficultyX * 25 * 50;
+		if (gameBoard.moves >= 7) {
+		
+			gameBoard.totalScore = gameBoard.totalScore-(gameBoard.difficultyX * 50);
+			Debug.Log ("<color=red>Your Score is </color>" + gameBoard.totalScore);
+		}
+		//if(gameBoard.gameOver)
+			//Debug.Log ("Your Score is " + gameBoard.totalScore);
 	}
 }

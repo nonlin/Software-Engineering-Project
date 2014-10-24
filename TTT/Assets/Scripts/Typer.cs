@@ -29,7 +29,8 @@ public class Typer : MonoBehaviour {
 		}
 		//yield return new WaitForSeconds(3);
 		//DestroyObject(GameObject.FindGameObjectWithTag("GameMaster"));
-		//Application.LoadLevel(0);
+		Destroy (GameObject.FindGameObjectWithTag("GameMaster"));
+		Application.LoadLevel(0);
 
 	}
 	public void startCR(string msg){
