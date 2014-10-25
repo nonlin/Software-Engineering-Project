@@ -6,9 +6,11 @@ public class Typer : MonoBehaviour {
 	
 	public Text textComp;
 	public AudioClip keyEnter;
+	private ScoreSystem ScoreToggle;
 	// Use this for initialization
 	void Start () {
 
+		ScoreToggle = GameObject.FindGameObjectWithTag ("ScorePrompt").GetComponent<ScoreSystem>();
 	}
 	
 	// Update is called once per frame
@@ -29,8 +31,9 @@ public class Typer : MonoBehaviour {
 		}
 		//yield return new WaitForSeconds(3);
 		//DestroyObject(GameObject.FindGameObjectWithTag("GameMaster"));
-		Destroy (GameObject.FindGameObjectWithTag("GameMaster"));
-		Application.LoadLevel(0);
+		ScoreToggle.ShowScorePrompt ();
+		//Destroy (GameObject.FindGameObjectWithTag("GameMaster"));
+		//Application.LoadLevel(0);
 
 	}
 	public void startCR(string msg){
