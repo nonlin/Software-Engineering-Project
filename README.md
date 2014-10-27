@@ -9,6 +9,7 @@ Make sure you open project with the right version (4.6-21) else you will have er
 I'll update readme to reflect changes in unity versions. 
 
 TODO
+
 Record Multiple User Scores (limited or Unlimited?)
 Medium AI
 Hard AI
