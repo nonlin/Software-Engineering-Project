@@ -95,4 +95,5 @@ public class CreateGameBoard : MonoBehaviour {
 		typerCS.startCR("Its A DRAW!!");
 	}
 
+
 }

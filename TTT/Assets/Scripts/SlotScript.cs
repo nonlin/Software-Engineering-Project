@@ -10,6 +10,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	private Image gamePieceImage;
 	public int slotNumber;
 	public CreateGameBoard gameBoard;
+	private ScoreInput scoreInput;
 	private GameMaster GMO;
 	private int slotNum;
 	private string[] slotNumString;
@@ -23,6 +24,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		player = 0;
 		GMO = GameObject.FindGameObjectWithTag ("GameMaster").GetComponent<GameMaster>();
 		gameBoard = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<CreateGameBoard>();
+		scoreInput = GameObject.FindGameObjectWithTag ("ScorePrompt").GetComponent<ScoreInput> ();
 		gamePieceImage = gameObject.transform.GetChild (0).GetComponent<Image> ();
 	}
 	
@@ -300,6 +302,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		
 			gameBoard.totalScore = gameBoard.totalScore-(gameBoard.difficultyX * 50);
 			Debug.Log ("<color=red>Your Score is </color>" + gameBoard.totalScore);
+			//scoreInput.SetGameScore(gameBoard.totalScore);
 		}
 		//if(gameBoard.gameOver)
 			//Debug.Log ("Your Score is " + gameBoard.totalScore);
