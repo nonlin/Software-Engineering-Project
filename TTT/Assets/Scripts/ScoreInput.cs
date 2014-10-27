@@ -41,12 +41,12 @@ public class ScoreInput : MonoBehaviour {
 	
 
 
-	public void SetGameScore(int score){
+	/*public void SetGameScore(int score){
 
 		Score = score.ToString ();
 		PlayerPrefs.SetString ("Score", Score);
 		PlayerPrefs.Save ();
 
-	}
+	}*/
 
 }

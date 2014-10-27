@@ -32,7 +32,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	void Update () {
 		//Make sure only non empty slots display an icon. 
 		if (gameBoard.GamePieceList[slotNumber].gamePieceName != null) {
-			ScoreSystem();
+
 			gamePiece = gameBoard.GamePieceList[slotNumber];
 			gamePieceImage.enabled = true;
 			gamePieceImage.sprite = gameBoard.GamePieceList[slotNumber].gamePieceIcon;
@@ -265,6 +265,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			} 
 
 			gameBoard.moves++;
+			ScoreSystem();
 			TurnSwitch(slot);
 		}
 	}
@@ -297,10 +298,11 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 
 	void ScoreSystem(){
 
-		gameBoard.totalScore = gameBoard.difficultyX * 25 * 50;
-		if (gameBoard.moves >= 7) {
+		//Debug.Log ("<color = red>Enter Score System</color>");
+
+		if (gameBoard.moves >= 4 && gameBoard.totalScore != 0) {
 		
-			gameBoard.totalScore = gameBoard.totalScore-(gameBoard.difficultyX * 50);
+			gameBoard.totalScore = gameBoard.totalScore-(gameBoard.difficultyX * 225);
 			Debug.Log ("<color=red>Your Score is </color>" + gameBoard.totalScore);
 			//scoreInput.SetGameScore(gameBoard.totalScore);
 		}

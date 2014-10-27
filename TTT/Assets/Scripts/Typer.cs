@@ -21,7 +21,7 @@ public class Typer : MonoBehaviour {
 	}
 
 	public IEnumerator TypeIn(string msg){
-
+		//Type Who Won
 		yield return new WaitForSeconds(.5f);
 		for(int i = 0; i <msg.Length; i++){
 
@@ -31,13 +31,23 @@ public class Typer : MonoBehaviour {
 		}
 		//yield return new WaitForSeconds(3);
 		//DestroyObject(GameObject.FindGameObjectWithTag("GameMaster"));
+		//Allow Winner to enter name for score recrod
 		ScoreToggle.ShowScorePrompt ();
-		//Destroy (GameObject.FindGameObjectWithTag("GameMaster"));
-		//Application.LoadLevel(0);
+		//Wait for them to hit enter
+		yield return StartCoroutine(WaitForKeyDown(KeyCode.Return));
+		//Return to main menu
+		Destroy (GameObject.FindGameObjectWithTag("GameMaster"));
+		Application.LoadLevel(0);//load main menu
 
 	}
 	public void startCR(string msg){
 
 		StartCoroutine ("TypeIn",msg);
+	}
+
+	IEnumerator WaitForKeyDown(KeyCode keyCode)
+	{
+		while (!Input.GetKeyDown(keyCode))
+			yield return null;
 	}
 }

@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class ScoreGet : MonoBehaviour {
 
-	public string Name;
-	public string Score;
+	private string Name;
+	private string Score;
 	public Text SetName;
 	public Text SetScore;
 
@@ -13,6 +13,7 @@ public class ScoreGet : MonoBehaviour {
 	void Start () {
 	
 		GetInput ();
+		GetGameScore ();
 	}
 	
 	// Update is called once per frame

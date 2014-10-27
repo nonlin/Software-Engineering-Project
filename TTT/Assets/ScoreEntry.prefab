@@ -60,9 +60,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: '5000
-
-'
+  m_Text: 33
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -97,11 +95,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 100002}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5013ac06f3473c40b6c14071c5ab805, type: 3}
+  m_Script: {fileID: 11500000, guid: c77a93d048fd1b1428c47752344527b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  Score: 
   SetName: {fileID: 11400002}
   SetScore: {fileID: 11400000}
 --- !u!222 &22200000

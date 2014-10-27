@@ -7,6 +7,8 @@ public class CreateGameBoard : MonoBehaviour {
 
 	public List<GamePiece> slotsO = new List<GamePiece>();
 	public List<GamePiece> GamePieceList = new List<GamePiece> ();
+	public List<GameObject> ScoreEntry = new List<GameObject>();
+
 	public GameObject slots;
 	public GameObject slot;
 	private PieceDB pieceDB;
@@ -23,9 +25,11 @@ public class CreateGameBoard : MonoBehaviour {
 	public int difficultyX;
 	public int totalScore;
 	public int currentScore;
+	public Text scoreText;
 	// Use this for initialization
 	void Start () {
-		//totalScore = difficultyX * 25 * 50;
+		//Set Mas Score Potential//Each Block worth 225 points/Worth more the harder the diff
+		totalScore = 5 * 25 * 225;
 		currentPlayer = 1;
 		slotAmount = 0;
 		pieceDB = GameObject.FindGameObjectWithTag ("PieceDB").GetComponent<PieceDB> ();
@@ -77,6 +81,7 @@ public class CreateGameBoard : MonoBehaviour {
 			}
 		}
 	}	
+
 	public void ShowWinnerPrompt(){
 		
 		if(currentPlayer == 1)
@@ -87,7 +92,10 @@ public class CreateGameBoard : MonoBehaviour {
 			typerCS.startCR("O gets 4 in a row. Player 2 wins!");
 			//prompt = "O gets 4 in a row. Player 2 wins!";
 		}
-
+		//Save Winners Score
+		PlayerPrefs.SetString ("Score", totalScore.ToString());
+		PlayerPrefs.Save ();
+		scoreText.text = totalScore.ToString ();
 	}
 
 	public void ShowStaleMatePrompt(){
@@ -95,5 +103,12 @@ public class CreateGameBoard : MonoBehaviour {
 		typerCS.startCR("Its A DRAW!!");
 	}
 
+	public void Quit(){
+
+		//Return to main menu
+		Destroy (GameObject.FindGameObjectWithTag("GameMaster"));
+		Application.LoadLevel(0);//load main menu
+		
+	}
 
 }
