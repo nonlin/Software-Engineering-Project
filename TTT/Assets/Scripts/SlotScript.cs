@@ -306,7 +306,5 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			Debug.Log ("<color=red>Your Score is </color>" + gameBoard.totalScore);
 			//scoreInput.SetGameScore(gameBoard.totalScore);
 		}
-		//if(gameBoard.gameOver)
-			//Debug.Log ("Your Score is " + gameBoard.totalScore);
 	}
 }

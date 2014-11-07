@@ -7,7 +7,6 @@ public class CreateGameBoard : MonoBehaviour {
 
 	public List<GamePiece> slotsO = new List<GamePiece>();
 	public List<GamePiece> GamePieceList = new List<GamePiece> ();
-	public List<GameObject> ScoreEntry = new List<GameObject>();
 
 	public GameObject slots;
 	public GameObject slot;
@@ -25,11 +24,16 @@ public class CreateGameBoard : MonoBehaviour {
 	public int difficultyX;
 	public int totalScore;
 	public int currentScore;
+	public int highScore;
+	public int[] highScores = new int[10];
+	public string highScorekey;
 	public Text scoreText;
 	// Use this for initialization
 	void Start () {
-		//Set Mas Score Potential//Each Block worth 225 points/Worth more the harder the diff
+
+		//Set Max Score Potential//Each Block worth 225 points/Worth more the harder the diff
 		totalScore = 5 * 25 * 225;
+
 		currentPlayer = 1;
 		slotAmount = 0;
 		pieceDB = GameObject.FindGameObjectWithTag ("PieceDB").GetComponent<PieceDB> ();
@@ -37,7 +41,7 @@ public class CreateGameBoard : MonoBehaviour {
 		for (int x = 0; x < 5; x++) {
 		
 			for(int y = 0; y <5; y++){
-
+				//We do this to have each slot made as gameobject under the gameobject this script is attachted too.
 				slot = (GameObject)Instantiate(slots);
 
 				slot.GetComponent<SlotScript>().slotNumber = slotAmount;
@@ -83,7 +87,7 @@ public class CreateGameBoard : MonoBehaviour {
 	}	
 
 	public void ShowWinnerPrompt(){
-		
+		 
 		if(currentPlayer == 1)
 		{
 			//prompt = "X gets 4 in a row. Player 1 wins!";
@@ -95,6 +99,7 @@ public class CreateGameBoard : MonoBehaviour {
 		//Save Winners Score
 		PlayerPrefs.SetString ("Score", totalScore.ToString());
 		PlayerPrefs.Save ();
+		//Debug.Log ("<color=white> SCORETEXT </color>" + totalScore);
 		scoreText.text = totalScore.ToString ();
 	}
 
@@ -111,4 +116,8 @@ public class CreateGameBoard : MonoBehaviour {
 		
 	}
 
+	void OnApplicationQuit() {
+
+	}
+	
 }

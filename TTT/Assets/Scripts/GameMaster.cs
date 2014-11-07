@@ -10,7 +10,6 @@ public class GameMaster : MonoBehaviour {
 	public int aiDiffID = 0;
 	// Use this for initialization
 	void Awake() {
-
 		DontDestroyOnLoad(this.gameObject);
 	}
 	
@@ -32,5 +31,11 @@ public class GameMaster : MonoBehaviour {
 	public void setAIDiffID(int currentAIDiffID){
 
 		aiDiffID = currentAIDiffID;
+	}
+
+	public void deletePlayerPrefs(){
+		PlayerPrefs.DeleteAll ();
+		//Reload 
+
 	}
 }

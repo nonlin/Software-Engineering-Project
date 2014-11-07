@@ -60,7 +60,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: 33
+  m_Text: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,7 +86,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: George Erfesoglou
+  m_Text: '-'
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,6 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SetName: {fileID: 11400002}
   SetScore: {fileID: 11400000}
+  EntryNum: 
 --- !u!222 &22200000
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -142,10 +143,10 @@ RectTransform:
   - {fileID: 22400000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -19, y: 982}
-  m_SizeDelta: {x: -36, y: -1961}
+  m_AnchorMin: {x: .5, y: 1}
+  m_AnchorMax: {x: .5, y: 1}
+  m_AnchoredPosition: {x: -20, y: -48}
+  m_SizeDelta: {x: 1665, y: 73}
   m_Pivot: {x: .5, y: .5}
 --- !u!1001 &100100000
 Prefab:
