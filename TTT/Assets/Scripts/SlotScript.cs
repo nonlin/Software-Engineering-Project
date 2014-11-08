@@ -55,12 +55,12 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 				PlacePiece(false,this.gameObject);
 				//Don't have AI play if Player Wins
 				if(!gameBoard.gameOver){
-					if(GMO.aiDiffID == 1 || GMO.aiDiffID == 0)
-						EasyAI();
-					if(GMO.aiDiffID == 2)
-						MedAI ();
-					if(GMO.aiDiffID == 3)
-						HardAI ();
+					if(GMO.aiDiffID == 1 || GMO.aiDiffID == 0){gameBoard.diffText.text = "Easy"; EasyAI();}
+						
+					if(GMO.aiDiffID == 2){gameBoard.diffText.text = "Normal"; MedAI ();}
+
+					if(GMO.aiDiffID == 3){gameBoard.diffText.text = "Hard"; HardAI ();}
+						
 				}
 			}	
 		}

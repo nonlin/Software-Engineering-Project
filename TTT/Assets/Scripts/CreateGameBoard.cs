@@ -34,6 +34,7 @@ public class CreateGameBoard : MonoBehaviour {
 	public int[] highScores = new int[10];
 	public string highScorekey;
 	public Text scoreText;
+	public Text diffText;
 	// Use this for initialization
 	void Start () {
 
