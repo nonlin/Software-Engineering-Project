@@ -7,6 +7,8 @@ public class CreateGameBoard : MonoBehaviour {
 
 	public List<GamePiece> slotsO = new List<GamePiece>();
 	public List<GamePiece> GamePieceList = new List<GamePiece> ();
+	public List<GameObject> BlockChance;// = new List<GameObject>();
+	public List<GameObject> WinChance; //= new List<GameObject>();
 
 	public GameObject slots;
 	public GameObject slot;
@@ -28,6 +30,7 @@ public class CreateGameBoard : MonoBehaviour {
 	public int[] highScores = new int[10];
 	public string highScorekey;
 	public Text scoreText;
+
 	// Use this for initialization
 	void Start () {
 
@@ -96,16 +99,13 @@ public class CreateGameBoard : MonoBehaviour {
 			typerCS.startCR("O gets 4 in a row. Player 2 wins!");
 			//prompt = "O gets 4 in a row. Player 2 wins!";
 		}
-		//Save Winners Score
-		PlayerPrefs.SetString ("Score", totalScore.ToString());
-		PlayerPrefs.Save ();
-		//Debug.Log ("<color=white> SCORETEXT </color>" + totalScore);
-		scoreText.text = totalScore.ToString ();
+		SaveScore ();
 	}
 
 	public void ShowStaleMatePrompt(){
 
 		typerCS.startCR("Its A DRAW!!");
+		SaveScore ();
 	}
 
 	public void Quit(){
@@ -119,5 +119,12 @@ public class CreateGameBoard : MonoBehaviour {
 	void OnApplicationQuit() {
 
 	}
-	
+
+	void SaveScore(){
+		//Save Winners Score
+		PlayerPrefs.SetString ("Score", totalScore.ToString());
+		PlayerPrefs.Save ();
+		//Debug.Log ("<color=white> SCORETEXT </color>" + totalScore);
+		scoreText.text = totalScore.ToString ();
+	}
 }
