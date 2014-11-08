@@ -9,6 +9,10 @@ public class CreateGameBoard : MonoBehaviour {
 	public List<GamePiece> GamePieceList = new List<GamePiece> ();
 	public List<GameObject> BlockChance;// = new List<GameObject>();
 	public List<GameObject> WinChance; //= new List<GameObject>();
+	//--
+	public List<GameObject> trapSetChance;// = new List<GameObject> ();
+	public List<GameObject> trapStopChance;// = new List<GameObject> ();
+	public List<GameObject> openCol = new List<GameObject> ();
 
 	public GameObject slots;
 	public GameObject slot;
@@ -30,7 +34,6 @@ public class CreateGameBoard : MonoBehaviour {
 	public int[] highScores = new int[10];
 	public string highScorekey;
 	public Text scoreText;
-
 	// Use this for initialization
 	void Start () {
 

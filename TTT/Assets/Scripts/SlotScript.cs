@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using System.Collections.Generic;
 
 public class SlotScript : MonoBehaviour, IPointerDownHandler {
-
+	
 	public GamePiece gamePiece;
 	private Image gamePieceImage;
 	public int slotNumber;
@@ -17,10 +17,10 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	public int x;
 	public int y;
 	public int player;
-
+	
 	// Use this for initialization
 	void Start () {
-
+		
 		player = 0;
 		GMO = GameObject.FindGameObjectWithTag ("GameMaster").GetComponent<GameMaster>();
 		gameBoard = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<CreateGameBoard>();
@@ -32,21 +32,21 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	void Update () {
 		//Make sure only non empty slots display an icon. 
 		if (gameBoard.GamePieceList[slotNumber].gamePieceName != null) {
-
+			
 			gamePiece = gameBoard.GamePieceList[slotNumber];
 			gamePieceImage.enabled = true;
 			gamePieceImage.sprite = gameBoard.GamePieceList[slotNumber].gamePieceIcon;
 		}
 		else{
-		
+			
 			gamePieceImage.enabled = false;
 		}
 	}
-
+	
 	public void OnPointerDown(PointerEventData data){
 		//User can't click when game is over.
 		if(!gameBoard.gameOver){
-
+			
 			//Prevent Click Spamming in the case of "Thinking NPC"
 			if(gameBoard.gameOver || gameBoard.currentPlayer == 2) return;
 			//Prevents double clicking in the same slot. 
@@ -55,13 +55,17 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 				PlacePiece(false,this.gameObject);
 				//Don't have AI play if Player Wins
 				if(!gameBoard.gameOver){
-
-					EasyAI();
+					if(GMO.aiDiffID == 1 || GMO.aiDiffID == 0)
+						EasyAI();
+					if(GMO.aiDiffID == 2)
+						MedAI ();
+					if(GMO.aiDiffID == 3)
+						HardAI ();
 				}
 			}	
 		}
 	}
-
+	
 	//Game Logic
 	public bool CheckForWin(GameObject slot){
 		Debug.Log ("Entered Check Win");
@@ -75,21 +79,21 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		 GetPlayerSlotID(slotCS.x,0) == (gameBoard.currentPlayer))){
 			Debug.Log ("Col Sat" + gameBoard.currentPlayer);
 			HighlightWin(1,slot);
-				
+			
 			return true; 
 		}
 		if ((GetPlayerSlotID(1,slotCS.y) == (gameBoard.currentPlayer)) &&
 		    GetPlayerSlotID(2,slotCS.y) == (gameBoard.currentPlayer) && 
 		    GetPlayerSlotID(3,slotCS.y) == (gameBoard.currentPlayer)&& 
 		    (GetPlayerSlotID(4,slotCS.y) == (gameBoard.currentPlayer) || 
-		 	GetPlayerSlotID(0,slotCS.y) == (gameBoard.currentPlayer))){
+		 GetPlayerSlotID(0,slotCS.y) == (gameBoard.currentPlayer))){
 			Debug.Log ("Row Sat");
 			HighlightWin(2,slot);
 			return true; 
 		}
 		//Diag Cross 1
 		if((GetPlayerSlotID(0,0) == (gameBoard.currentPlayer) || 
-		   	GetPlayerSlotID(4,4) == (gameBoard.currentPlayer)) &&
+		    GetPlayerSlotID(4,4) == (gameBoard.currentPlayer)) &&
 		   GetPlayerSlotID(1,1) == (gameBoard.currentPlayer) &&
 		   GetPlayerSlotID(2,2) == (gameBoard.currentPlayer) &&
 		   GetPlayerSlotID(3,3) == (gameBoard.currentPlayer)){
@@ -142,36 +146,36 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		}
 		return false; 
 	}
-
+	
 	public int GetPlayerSlotID(int x, int y){
-
+		
 		//Debug.Log ("aGrid Player:"+gameBoard.aGrid [x, y].GetComponent<SlotScript> ().player+" at "+x+"-"+y);
 		return gameBoard.aGrid [x, y].GetComponent<SlotScript> ().player;
 	}
-
+	
 	void HighlightWin(int winID, GameObject slot){
-
+		
 		SlotScript slotCS = slot.GetComponent<SlotScript> ();
 		for(int i = 0; i < 5; i++)
 			for(int j = 0; j < 5; j++)
-				switch(winID){
+			switch(winID){
 				case 1:
 				if(GetPlayerSlotID(slotCS.x,j) == gameBoard.currentPlayer){
 					gameBoard.aGrid [slotCS.x, j].GetComponent<Image>().color = Color.green;
-					}
-					break;
+				}
+				break;
 				case 2:
 				if(GetPlayerSlotID(i,slotCS.y) == gameBoard.currentPlayer){
 					gameBoard.aGrid [i, slotCS.y].GetComponent<Image>().color = Color.green;
-					}
-					break;
+				}
+				break;
 				case 3:
 				if(GetPlayerSlotID(i,j) == gameBoard.currentPlayer && i == j){
-
-						gameBoard.aGrid [i, j].GetComponent<Image>().color = Color.green;
-						
-					}
-					break;
+					
+					gameBoard.aGrid [i, j].GetComponent<Image>().color = Color.green;
+					
+				}
+				break;
 				case 4://Top Diag 
 				if(GetPlayerSlotID(i,j) == gameBoard.currentPlayer && i == (j+1)){
 					
@@ -210,48 +214,87 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 				default:
 				Debug.Log ("Error: Convential Win Not Found");
 				break;
-				}
+			}
 		
 	}
 	public IEnumerator TieHighLight(){
 		for(int i = 0; i < 5; i++)
-			for(int j = 0; j < 5; j++){
-				yield return new WaitForSeconds(.5f);
-				gameBoard.aGrid[i,j].GetComponent<Image>().color = Color.blue;
+		for(int j = 0; j < 5; j++){
+			yield return new WaitForSeconds(.5f);
+			gameBoard.aGrid[i,j].GetComponent<Image>().color = Color.blue;
 		}
 		//gameBoard.GetComponent<SlotScript>().enabled = false;
 	}
 	public void EasyAI(){
-
+		
 		gameBoard.difficultyX = 5;
 		GameObject slot = null;
-
-		slot = WinOrBlock(); 
-		//if(slot == null) slot = CreateTrap(); 
-		//if(slot == null) slot = PreventTrap();
+		
+		//slot = WinOrBlock(); 
+		if(slot == null) slot = PreventOrCreateTrap();
 		if(slot == null) slot = GetCenter(); 
 		if(slot == null) slot = GetEmptyCorner(); 
 		if(slot == null) slot = GetEmptySide();
 		if(slot == null) slot = GetEmptyInnerSide();
 		if(slot == null) slot = GetRandomEmptySlot();
-
 		//get the slot number via the name and store it in npcPiece so that we know what location to put the piece at
 		if(slot != null){
 			gameBoard.npcPiece = int.Parse(slot.GetComponent<SlotScript>().name);
 			PlacePiece(true,slot);
 		}
 		else{
-			gameBoard.gameOver = true;
-			gameBoard.ShowStaleMatePrompt ();
-			//This is how to call IEnumerators to have delayed functions
-			StartCoroutine ("TieHighLight");
+			GameOverTie();
 		}
 	}
 
-	void PlacePiece(bool turnAIOn, GameObject slot){
+	public void MedAI(){
+		
+		gameBoard.difficultyX = 5;
+		GameObject slot = null;
+		
+		slot = WinOrBlock(); 
+		//if(slot == null) slot = PreventOrCreateTrap();
+		if(slot == null) slot = GetCenter(); 
+		if(slot == null) slot = GetEmptyCorner(); 
+		if(slot == null) slot = GetEmptySide();
+		if(slot == null) slot = GetEmptyInnerSide();
+		if(slot == null) slot = GetRandomEmptySlot();
+		//get the slot number via the name and store it in npcPiece so that we know what location to put the piece at
+		if(slot != null){
+			gameBoard.npcPiece = int.Parse(slot.GetComponent<SlotScript>().name);
+			PlacePiece(true,slot);
+		}
+		else{
+			GameOverTie();
+		}
+	}
 
+	public void HardAI(){
+		
+		gameBoard.difficultyX = 5;
+		GameObject slot = null;
+		
+		slot = WinOrBlock(); 
+		if(slot == null) slot = PreventOrCreateTrap();
+		if(slot == null) slot = GetCenter(); 
+		if(slot == null) slot = GetEmptyCorner(); 
+		if(slot == null) slot = GetEmptySide();
+		if(slot == null) slot = GetEmptyInnerSide();
+		if(slot == null) slot = GetRandomEmptySlot();
+		//get the slot number via the name and store it in npcPiece so that we know what location to put the piece at
+		if(slot != null){
+			gameBoard.npcPiece = int.Parse(slot.GetComponent<SlotScript>().name);
+			PlacePiece(true,slot);
+		}
+		else{
+			GameOverTie();
+		}
+	}
+	
+	void PlacePiece(bool turnAIOn, GameObject slot){
+		
 		//For AI Logic
-		if (GMO.aiDiffID == 1 && turnAIOn) {
+		if (GMO.aiDiffID >= 0 && turnAIOn) {
 			Debug.Log ("NPC SLOTNUM"+gameBoard.npcPiece);
 			gameBoard.AddPiece (1, gameBoard.npcPiece);
 			TurnSwitch(slot);
@@ -260,28 +303,28 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		if (gameBoard.GamePieceList [slotNumber].gamePieceName == null) {
 			slotNum = int.Parse (transform.name);
 			Debug.Log ("Current Player"+gameBoard.currentPlayer);
-
-
+			
+			
 			if (gameBoard.currentPlayer == 1) {
-					
+				
 				gameBoard.AddPiece (0, slotNum);
-			} else if (GMO.aiDiffID == 0) {
-
+			} else if (GMO.aiDiffID == -1) {
+				
 				gameBoard.AddPiece (1, slotNum);
 			} 
-
+			
 			gameBoard.moves++;
 			ScoreSystem();
 			TurnSwitch(slot);
 		}
 	}
-
+	
 	void TurnSwitch(GameObject slot){
 		//Update Slot Player Info With the Current Player
 		slot.GetComponent<SlotScript>().player = gameBoard.currentPlayer;
 		//Check for Win Every Turn
 		if (CheckForWin (slot)) {
-
+			
 			gameBoard.gameOver = true;
 			Debug.Log ("Player " + slot.GetComponent<SlotScript>().player + " Won!");
 			gameBoard.ShowWinnerPrompt ();
@@ -301,25 +344,25 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		if (gameBoard.currentPlayer > 2)
 			gameBoard.currentPlayer = 1;
 	}
-
+	
 	void ScoreSystem(){
-
-		//Debug.Log ("<color = red>Enter Score System</color>");
-
-		if (gameBoard.moves >= 4 && gameBoard.totalScore != 0) {
 		
+		//Debug.Log ("<color = red>Enter Score System</color>");
+		
+		if (gameBoard.moves >= 4 && gameBoard.totalScore != 0) {
+			
 			gameBoard.totalScore = gameBoard.totalScore-(gameBoard.difficultyX * 225);
 			Debug.Log ("<color=red>Your Score is </color>" + gameBoard.totalScore);
 			//scoreInput.SetGameScore(gameBoard.totalScore);
 		}
 	}
-
+	
 	GameObject GetRandomEmptySlot(){
-
+		
 		GameObject slot;
 		List<GameObject> emptySlots = new List<GameObject> ();
 		for(int i = 0; i < 5; i++)
-			for(int j = 0; j < 5; j++){
+		for(int j = 0; j < 5; j++){
 			//slot can be any slot from the grid
 			slot = gameBoard.aGrid[i,j];
 			//if slot is empty aka no player assigned//Gotta check that specfic slots slot script
@@ -330,39 +373,39 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		}
 		//then set the slot equal to some empty slot from the list of empty slots available
 		if(emptySlots.Count > 0){
-			Debug.Log ("<color=yellow>RandomEmptySlot</color>");
+			Debug.Log ("<color=purple>RandomEmptySlot</color>");
 			slot = emptySlots [Random.Range (0, emptySlots.Count)];
 			return slot;
 		}
-
+		
 		return null;
 	}
-
+	
 	GameObject GetEmptySide(){
-
-	//	GameObject slot;
+		
+		//	GameObject slot;
 		List<GameObject> emptySides = new List<GameObject> ();
 		//Note that doing it this way has some overlapping slots. Perhaps divide the inner layer into its own function
 		for(int y = 1; y < 4; y++){
 			//Left
 			if(gameBoard.aGrid[4,y].GetComponent<SlotScript>().GetPlayerSlotID(4,y) == 0) emptySides.Add(gameBoard.aGrid[4,y]);
-
+			
 			//Right
 			if(gameBoard.aGrid[0,y].GetComponent<SlotScript>().GetPlayerSlotID(0,y) == 0) emptySides.Add(gameBoard.aGrid[0,y]);
-
+			
 		}
-
+		
 		for(int x = 1; x < 4; x++){
 			//Top
 			if(gameBoard.aGrid[x,0].GetComponent<SlotScript>().GetPlayerSlotID(x,0) == 0) emptySides.Add(gameBoard.aGrid[x,0]);
 			//Bot
 			if(gameBoard.aGrid[x,4].GetComponent<SlotScript>().GetPlayerSlotID(x,4) == 0) emptySides.Add(gameBoard.aGrid[x,4]);
 		}
-		if (emptySides.Count > 0) { Debug.Log ("<color=yellow>SidePlay</color>"); return emptySides [Random.Range (0, emptySides.Count)]; }
-
+		if (emptySides.Count > 0) { Debug.Log ("<color=purple>SidePlay</color>"); return emptySides [Random.Range (0, emptySides.Count)]; }
+		
 		return null; 
 	}
-
+	
 	GameObject GetEmptyInnerSide(){
 		List<GameObject> emptyInnerSides = new List<GameObject> ();
 		for(int y = 1; y < 4; y++){
@@ -375,35 +418,35 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			//Bot
 			if(gameBoard.aGrid[x,3].GetComponent<SlotScript>().GetPlayerSlotID(x,3) == 0) emptyInnerSides.Add(gameBoard.aGrid[x,3]);//Inner
 		}
-		if (emptyInnerSides.Count > 0) { Debug.Log ("<color=yellow>innerSidePlay</color>"); return emptyInnerSides [Random.Range (0, emptyInnerSides.Count)]; }
+		if (emptyInnerSides.Count > 0) { Debug.Log ("<color=purple>innerSidePlay</color>"); return emptyInnerSides [Random.Range (0, emptyInnerSides.Count)]; }
 		return null;
 	}
-
+	
 	GameObject GetEmptyCorner(){
-
+		
 		List<GameObject> emptyCorners = new List<GameObject> ();
-
+		
 		if(GetPlayerSlotID(4,0) == 0) emptyCorners.Add (gameBoard.aGrid[4,0]);
 		if(GetPlayerSlotID(4,4) == 0) emptyCorners.Add (gameBoard.aGrid[4,4]);
 		if(GetPlayerSlotID(0,0) == 0) emptyCorners.Add (gameBoard.aGrid[0,0]);
 		if(GetPlayerSlotID(0,4) == 0) emptyCorners.Add (gameBoard.aGrid[0,4]);
-		if (emptyCorners.Count > 0) {Debug.Log ("<color=yellow>Corner</color>"); return emptyCorners [Random.Range (0, emptyCorners.Count)]; }
-
+		if (emptyCorners.Count > 0) {Debug.Log ("<color=purple>Corner</color>"); return emptyCorners [Random.Range (0, emptyCorners.Count)]; }
+		
 		return null;
 	}
-
+	
 	GameObject GetCenter(){
-
-		if(gameBoard.aGrid[2,2].GetComponent<SlotScript>().GetPlayerSlotID(2,2) == 0){ Debug.Log ("<color=yellow>Center</color>"); return gameBoard.aGrid[2,2]; }
+		
+		if(gameBoard.aGrid[2,2].GetComponent<SlotScript>().GetPlayerSlotID(2,2) == 0){ Debug.Log ("<color=purple>Center</color>"); return gameBoard.aGrid[2,2]; }
 		return null; 
 	}
-
+	
 	GameObject WinOrBlock(){
-
+		
 		gameBoard.BlockChance = new List<GameObject>();
 		gameBoard.WinChance = new List<GameObject>();
 		for(int i = 0; i < 5; i++){
-
+			
 			CheckFor3InARow (new Vector2[] {new Vector2 (i,0), new Vector2 (i,1),new Vector2 (i,2), new Vector2(i,3)},"col");
 			CheckFor3InARow (new Vector2[] {new Vector2 (i,4), new Vector2 (i,1),new Vector2 (i,2), new Vector2(i,3)},"col");
 		}
@@ -423,25 +466,25 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		CheckFor3InARow (new Vector2[] {new Vector2 (1,1), new Vector2 (2,2), new Vector2(3,3), new Vector2(4,4)},"Diag 2-2");
 		CheckFor3InARow (new Vector2[] {new Vector2 (0,1), new Vector2 (1,2),new Vector2 (2,3), new Vector2(3,4)},"Diag 2-3");
 		
-
-		if(gameBoard.WinChance.Count > 0) {Debug.Log ("<color=yellow>Win</color>"); return gameBoard.WinChance[Random.Range (0, gameBoard.WinChance.Count)]; }
-		if(gameBoard.BlockChance.Count > 0) {Debug.Log ("<color=yellow>Block</color>"); return gameBoard.BlockChance[Random.Range (0, gameBoard.BlockChance.Count)]; }
+		
+		if(gameBoard.WinChance.Count > 0) {Debug.Log ("<color=purple>Win</color>"); return gameBoard.WinChance[Random.Range (0, gameBoard.WinChance.Count)]; }
+		if(gameBoard.BlockChance.Count > 0) {Debug.Log ("<color=purple>Block</color>"); return gameBoard.BlockChance[Random.Range (0, gameBoard.BlockChance.Count)]; }
 		//no chance to block/win return null
 		return null; 
 	}
-
+	
 	void CheckFor3InARow(Vector2[] coords, string debugText){
-
+		
 		int p1inRow = 0;
 		int p2inRow = 0;
 		int player;
 		GameObject slot = null;
 		Vector2 coord;
-
+		
 		for(int i = 0; i < 4; i++){
 			coord = coords[i];
 			player = gameBoard.aGrid[(int)coord.x, (int)coord.y].GetComponent<SlotScript>().player;
-
+			
 			//if slot is empty aka no player assigned
 			if(player == 1){
 				p1inRow++;
@@ -454,19 +497,92 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 				slot = gameBoard.aGrid[(int)coord.x,(int)coord.y];
 			}
 		}
-
+		
 		if(slot != null) {
-				
+			
 			//we found an empty slot in this row
 			if(p2inRow == 3){
 				//There are 3 O's in a row with an empty slot
 				gameBoard.WinChance.Add (slot);
 			}
 			else if(p1inRow == 3){
-
+				
 				gameBoard.BlockChance.Add (slot);
 			}
 		}
 		//Debug.Log ("<color=red>CheckFor3InARow: </color>" + slot.name + " " + debugText);
+	}
+
+	GameObject PreventOrCreateTrap(){
+			
+		gameBoard.trapSetChance = new List<GameObject> ();
+		gameBoard.trapStopChance = new List<GameObject> ();
+		gameBoard.openCol = new List<GameObject> ();
+		//GameObject[] ColTraps;
+		GameObject slot = null;
+		int player;
+
+		for(int i = 0; i < 5; i++){
+			//Col
+			CheckFor2InARow(new Vector2[] {new Vector2(i,1),new Vector2(i,2),new Vector2(i,3),});
+			//Row
+			CheckFor2InARow(new Vector2[] {new Vector2(1,i),new Vector2(2,i),new Vector2(3,i),});
+		}
+		//Diag
+		CheckFor2InARow(new Vector2[] {new Vector2(3,3),new Vector2(2,2),new Vector2(1,1),});
+		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(2,2),new Vector2(1,3),});
+		//SetTrap
+		if(gameBoard.trapSetChance.Count > 0) {
+			Debug.Log ("<color=red>SetTrap</color>"); return gameBoard.trapSetChance[Random.Range(0, gameBoard.trapSetChance.Count)];}
+		//prevent trap
+		if(gameBoard.trapStopChance.Count > 0){ 
+			Debug.Log ("<color=red>PreventTrap</color>"); return gameBoard.trapStopChance[Random.Range(0, gameBoard.trapStopChance.Count)];}
+		
+		return null;
+
+	}
+
+	void CheckFor2InARow(Vector2[] coords){
+		int p1inRow = 0;
+		int p2inRow = 0;
+		int player;
+		GameObject slot = null;
+		Vector2 coord;
+		
+		for(int i = 0; i < 3; i++){
+			coord = coords[i];
+			player = gameBoard.aGrid[(int)coord.x, (int)coord.y].GetComponent<SlotScript>().player;
+			
+			//if slot is empty aka no player assigned
+			if(player == 1){
+				p1inRow++;
+			}
+			else if(player == 2){
+				p2inRow++;
+			}
+			else{
+				//Store Empty slot for later
+				slot = gameBoard.aGrid[(int)coord.x,(int)coord.y];
+			}
+		}
+		
+		if(slot != null) {
+			
+			//we found an empty slot in this row
+			if(p2inRow == 2){
+				//There are 2 O's in a row with an empty slot
+				gameBoard.trapSetChance.Add (slot);
+			}
+			else if(p1inRow == 2){
+				
+				gameBoard.trapStopChance.Add (slot);
+			}
+		}
+	}
+	void GameOverTie(){
+		gameBoard.gameOver = true;
+		gameBoard.ShowStaleMatePrompt ();
+		//This is how to call IEnumerators to have delayed functions
+		StartCoroutine ("TieHighLight");
 	}
 }
