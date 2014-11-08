@@ -48,7 +48,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		if(!gameBoard.gameOver){
 			
 			//Prevent Click Spamming in the case of "Thinking NPC"
-			if(gameBoard.gameOver || gameBoard.currentPlayer == 2) return;
+		//	if(gameBoard.gameOver || gameBoard.currentPlayer == 2) return;
 			//Prevents double clicking in the same slot. 
 			if (gameBoard.GamePieceList [slotNumber].gamePieceName == null) {
 				//User's Place Piece is called with AI off. 
@@ -306,10 +306,10 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			
 			
 			if (gameBoard.currentPlayer == 1) {
-				
+				Debug.Log ("____X___");
 				gameBoard.AddPiece (0, slotNum);
 			} else if (GMO.aiDiffID == -1) {
-				
+				Debug.Log ("____O____");
 				gameBoard.AddPiece (1, slotNum);
 			} 
 			
@@ -531,6 +531,11 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		//Diag
 		CheckFor2InARow(new Vector2[] {new Vector2(3,3),new Vector2(2,2),new Vector2(1,1),});
 		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(2,2),new Vector2(1,3),});
+		//Other Diag Trap
+		CheckFor2InARow(new Vector2[] {new Vector2(4,4),new Vector2(3,3),new Vector2(2,2),});
+		CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,1),new Vector2(0,0),});
+		CheckFor2InARow(new Vector2[] {new Vector2(4,0),new Vector2(3,1),new Vector2(2,2),});
+		CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,3),new Vector2(0,4),});
 		//SetTrap
 		if(gameBoard.trapSetChance.Count > 0) {
 			Debug.Log ("<color=red>SetTrap</color>"); return gameBoard.trapSetChance[Random.Range(0, gameBoard.trapSetChance.Count)];}
