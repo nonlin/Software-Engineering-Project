@@ -277,9 +277,11 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		slot = WinOrBlock(); 
 		if(slot == null) slot = PreventOrCreateTrap();
 		if(slot == null) slot = GetCenter(); 
+		if(slot == null) slot = GetEmptyInnerCorner();
+		if(slot == null) slot = GetEmptyInnerSide();
 		if(slot == null) slot = GetEmptyCorner(); 
 		if(slot == null) slot = GetEmptySide();
-		if(slot == null) slot = GetEmptyInnerSide();
+
 		if(slot == null) slot = GetRandomEmptySlot();
 		//get the slot number via the name and store it in npcPiece so that we know what location to put the piece at
 		if(slot != null){
@@ -405,20 +407,31 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		
 		return null; 
 	}
-	
 	GameObject GetEmptyInnerSide(){
 		List<GameObject> emptyInnerSides = new List<GameObject> ();
-		for(int y = 1; y < 4; y++){
-			if(gameBoard.aGrid[3,y].GetComponent<SlotScript>().GetPlayerSlotID(3,y) == 0) emptyInnerSides.Add(gameBoard.aGrid[3,y]);//Inner
-			if(gameBoard.aGrid[1,y].GetComponent<SlotScript>().GetPlayerSlotID(1,y) == 0) emptyInnerSides.Add(gameBoard.aGrid[1,y]);//Inner
-		}
-		for(int x = 1; x < 4; x++){
-			//Top
-			if(gameBoard.aGrid[x,1].GetComponent<SlotScript>().GetPlayerSlotID(x,1) == 0) emptyInnerSides.Add(gameBoard.aGrid[x,1]);//Inner
-			//Bot
-			if(gameBoard.aGrid[x,3].GetComponent<SlotScript>().GetPlayerSlotID(x,3) == 0) emptyInnerSides.Add(gameBoard.aGrid[x,3]);//Inner
-		}
+		
+		if(gameBoard.aGrid[3,2].GetComponent<SlotScript>().GetPlayerSlotID(3,2) == 0) emptyInnerSides.Add(gameBoard.aGrid[3,2]);//Inner
+		if(gameBoard.aGrid[2,1].GetComponent<SlotScript>().GetPlayerSlotID(2,1) == 0) emptyInnerSides.Add(gameBoard.aGrid[2,1]);//Inner
+		
+		if(gameBoard.aGrid[2,3].GetComponent<SlotScript>().GetPlayerSlotID(2,3) == 0) emptyInnerSides.Add(gameBoard.aGrid[2,3]);//Inner
+		
+		if(gameBoard.aGrid[1,2].GetComponent<SlotScript>().GetPlayerSlotID(1,2) == 0) emptyInnerSides.Add(gameBoard.aGrid[1,2]);//Inner
+		
 		if (emptyInnerSides.Count > 0) { Debug.Log ("<color=purple>innerSidePlay</color>"); return emptyInnerSides [Random.Range (0, emptyInnerSides.Count)]; }
+		return null;
+	
+	}
+	GameObject GetEmptyInnerCorner(){
+		List<GameObject> emptyInnerCorner = new List<GameObject> ();
+
+		if(gameBoard.aGrid[3,1].GetComponent<SlotScript>().GetPlayerSlotID(3,1) == 0) emptyInnerCorner.Add(gameBoard.aGrid[3,1]);//Inner
+		if(gameBoard.aGrid[1,1].GetComponent<SlotScript>().GetPlayerSlotID(1,1) == 0) emptyInnerCorner.Add(gameBoard.aGrid[1,1]);//Inner
+
+		if(gameBoard.aGrid[3,3].GetComponent<SlotScript>().GetPlayerSlotID(3,3) == 0) emptyInnerCorner.Add(gameBoard.aGrid[3,3]);//Inner
+			
+		if(gameBoard.aGrid[1,3].GetComponent<SlotScript>().GetPlayerSlotID(1,3) == 0) emptyInnerCorner.Add(gameBoard.aGrid[1,3]);//Inner
+
+		if (emptyInnerCorner.Count > 0) { Debug.Log ("<color=purple>innerSidePlay</color>"); return emptyInnerCorner [Random.Range (0, emptyInnerCorner.Count)]; }
 		return null;
 	}
 	
@@ -459,11 +472,11 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		CheckFor3InARow (new Vector2[] {new Vector2 (3,0), new Vector2 (2,1),new Vector2 (1,2), new Vector2(0,3)},"Diag 1-1");
 		CheckFor3InARow (new Vector2[] {new Vector2 (4,0), new Vector2 (3,1),new Vector2 (2,2), new Vector2(1,3)},"Diag 1-2");
 		CheckFor3InARow (new Vector2[] {new Vector2 (0,4), new Vector2 (3,1),new Vector2 (2,2), new Vector2(1,3)},"Diag 1-2");
-		CheckFor3InARow (new Vector2[] {new Vector2 (0,4), new Vector2 (3,2),new Vector2 (2,3), new Vector2(1,4)},"Diag 1-3");
+		CheckFor3InARow (new Vector2[] {new Vector2 (4,1), new Vector2 (3,2),new Vector2 (2,3), new Vector2(1,4)},"Diag 1-3");
 		//Diag Set 2
 		CheckFor3InARow (new Vector2[] {new Vector2 (1,0), new Vector2 (2,1),new Vector2 (3,2), new Vector2(4,3)},"Diag 2-1");
 		CheckFor3InARow (new Vector2[] {new Vector2 (0,0), new Vector2 (1,1),new Vector2 (2,2), new Vector2(3,3)},"Diag 2-2");
-		CheckFor3InARow (new Vector2[] {new Vector2 (1,1), new Vector2 (2,2), new Vector2(3,3), new Vector2(4,4)},"Diag 2-2");
+		CheckFor3InARow (new Vector2[] {new Vector2 (1,1), new Vector2 (2,2),new Vector2 (3,3), new Vector2(4,4)},"Diag 2-2");
 		CheckFor3InARow (new Vector2[] {new Vector2 (0,1), new Vector2 (1,2),new Vector2 (2,3), new Vector2(3,4)},"Diag 2-3");
 		
 		
@@ -537,8 +550,8 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		CheckFor2InARow(new Vector2[] {new Vector2(4,0),new Vector2(3,1),new Vector2(2,2),});
 		CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,3),new Vector2(0,4),});
 		//SetTrap
-		if(gameBoard.trapSetChance.Count > 0) {
-			Debug.Log ("<color=red>SetTrap</color>"); return gameBoard.trapSetChance[Random.Range(0, gameBoard.trapSetChance.Count)];}
+		//if(gameBoard.trapSetChance.Count > 0) {
+		//	Debug.Log ("<color=red>SetTrap</color>"); return gameBoard.trapSetChance[Random.Range(0, gameBoard.trapSetChance.Count)];}
 		//prevent trap
 		if(gameBoard.trapStopChance.Count > 0){ 
 			Debug.Log ("<color=red>PreventTrap</color>"); return gameBoard.trapStopChance[Random.Range(0, gameBoard.trapStopChance.Count)];}
