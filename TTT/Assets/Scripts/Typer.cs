@@ -37,6 +37,7 @@ public class Typer : MonoBehaviour {
 		yield return StartCoroutine(WaitForKeyDown(KeyCode.Return));
 		//Return to main menu
 		Destroy (GameObject.FindGameObjectWithTag("GameMaster"));
+
 		Application.LoadLevel(0);//load main menu
 
 	}

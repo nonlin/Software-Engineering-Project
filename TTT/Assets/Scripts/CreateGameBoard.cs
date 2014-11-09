@@ -13,7 +13,7 @@ public class CreateGameBoard : MonoBehaviour {
 	public List<GameObject> trapSetChance;// = new List<GameObject> ();
 	public List<GameObject> trapStopChance;// = new List<GameObject> ();
 	public List<GameObject> openCol = new List<GameObject> ();
-
+	private GameMaster GMO;
 	public GameObject slots;
 	public GameObject slot;
 	private PieceDB pieceDB;
@@ -38,13 +38,17 @@ public class CreateGameBoard : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		GMO = GameObject.FindGameObjectWithTag ("GameMaster").GetComponent<GameMaster>();
 		//Set Max Score Potential//Each Block worth 225 points/Worth more the harder the diff
-		totalScore = 5 * 25 * 225;
+		if(GMO.aiDiffID == 1 || GMO.aiDiffID == 0){totalScore = 5 * 25 * 225;}
+		if(GMO.aiDiffID == 2){totalScore = 10 * 25 * 225;}
+		if(GMO.aiDiffID == 3){totalScore = 15 * 25 * 225;}
 
 		currentPlayer = 1;
 		slotAmount = 0;
 		pieceDB = GameObject.FindGameObjectWithTag ("PieceDB").GetComponent<PieceDB> ();
 		typerCS = GameObject.FindGameObjectWithTag ("Prompt").GetComponent<Typer> ();
+
 		for (int x = 0; x < 5; x++) {
 		
 			for(int y = 0; y <5; y++){
@@ -67,6 +71,7 @@ public class CreateGameBoard : MonoBehaviour {
 			}
 
 		}
+
 	}
 	
 	// Update is called once per frame
@@ -98,9 +103,9 @@ public class CreateGameBoard : MonoBehaviour {
 		if(currentPlayer == 1)
 		{
 			//prompt = "X gets 4 in a row. Player 1 wins!";
-			typerCS.startCR("X gets 4 in a row. Player 1 wins!");
+			typerCS.startCR("Player 1 wins!");
 		} else {
-			typerCS.startCR("O gets 4 in a row. Player 2 wins!");
+			typerCS.startCR("Player 2 wins!");
 			//prompt = "O gets 4 in a row. Player 2 wins!";
 		}
 		SaveScore ();
@@ -116,6 +121,7 @@ public class CreateGameBoard : MonoBehaviour {
 
 		//Return to main menu
 		Destroy (GameObject.FindGameObjectWithTag("GameMaster"));
+
 		Application.LoadLevel(0);//load main menu
 		
 	}

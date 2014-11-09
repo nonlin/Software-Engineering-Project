@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class MenuManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
 	
@@ -11,7 +12,7 @@ public class MenuManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 	//private int volLvl = 1.0f;
 	// Use this for initialization
 	void Start () {
-		
+
 		menuAnim = this.GetComponent<Animator> ();
 		menuAnim.SetBool ("showOp", false);
 	}
@@ -44,4 +45,5 @@ public class MenuManager : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 	public void showScoreBoard(){menuAnim.SetBool("show",true);}
 
 	public void hideScoreBoard(){menuAnim.SetBool("show",false);}
+
 }

@@ -8,6 +8,8 @@ public class GameMaster : MonoBehaviour {
 	public AudioClip ButtonSelect;
 	public float effectVol = 1.0f;
 	public int aiDiffID = 0;
+	public int First = 1;
+	public bool AIFirst = false;
 	// Use this for initialization
 	void Awake() {
 		DontDestroyOnLoad(this.gameObject);
@@ -37,5 +39,13 @@ public class GameMaster : MonoBehaviour {
 		PlayerPrefs.DeleteAll ();
 		//Reload 
 
+	}
+
+	public void setFirst(int first){
+		
+		First = first;
+	}
+	public void setAIFirst(bool NPCFirst){
+		AIFirst = NPCFirst;
 	}
 }

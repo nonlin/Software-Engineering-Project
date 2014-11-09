@@ -17,7 +17,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	public int x;
 	public int y;
 	public int player;
-	
+
 	// Use this for initialization
 	void Start () {
 		
@@ -26,6 +26,17 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		gameBoard = GameObject.FindGameObjectWithTag ("GameBoard").GetComponent<CreateGameBoard>();
 		scoreInput = GameObject.FindGameObjectWithTag ("ScorePrompt").GetComponent<ScoreInput> ();
 		gamePieceImage = gameObject.transform.GetChild (0).GetComponent<Image> ();
+		if(GMO.AIFirst == true) {
+
+			//Simulate Fake Click to get the game started.
+			if (gameBoard.GamePieceList [slotNumber].gamePieceName == null) 
+			if (this.gameObject == gameBoard.aGrid[2,2] && GMO.aiDiffID >= 0) {
+				gameBoard.currentPlayer++;
+				if(GMO.aiDiffID == 1 || GMO.aiDiffID == 0){gameBoard.diffText.text = "Easy"; EasyAI();}
+				if(GMO.aiDiffID == 2){gameBoard.diffText.text = "Normal"; MedAI ();}
+				if(GMO.aiDiffID == 3){gameBoard.diffText.text = "Hard"; HardAI ();}
+			}
+		}
 	}
 	
 	// Update is called once per frame
@@ -55,7 +66,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 				PlacePiece(false,this.gameObject);
 				//Don't have AI play if Player Wins
 				if(!gameBoard.gameOver){
-					if(GMO.aiDiffID == 1 || GMO.aiDiffID == 0){gameBoard.diffText.text = "Easy"; EasyAI();}
+					if(GMO.aiDiffID == 1 || GMO.aiDiffID == 0){gameBoard.diffText.text = "Easy"; EasyAI(); }
 						
 					if(GMO.aiDiffID == 2){gameBoard.diffText.text = "Normal"; MedAI ();}
 
@@ -233,10 +244,11 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		//slot = WinOrBlock(); 
 		if(slot == null) slot = PreventOrCreateTrap();
 		if(slot == null) slot = GetCenter(); 
+		if(slot == null) slot = GetEmptyInnerCorner();
+		if(slot == null) slot = GetEmptyInnerSide();
 		if(slot == null) slot = GetEmptyCorner(); 
 		if(slot == null) slot = GetEmptySide();
-		if(slot == null) slot = GetEmptyInnerSide();
-		if(slot == null) slot = GetRandomEmptySlot();
+
 		//get the slot number via the name and store it in npcPiece so that we know what location to put the piece at
 		if(slot != null){
 			gameBoard.npcPiece = int.Parse(slot.GetComponent<SlotScript>().name);
@@ -249,16 +261,17 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 
 	public void MedAI(){
 		
-		gameBoard.difficultyX = 5;
+		gameBoard.difficultyX = 10;
 		GameObject slot = null;
 		
 		slot = WinOrBlock(); 
 		//if(slot == null) slot = PreventOrCreateTrap();
 		if(slot == null) slot = GetCenter(); 
+		if(slot == null) slot = GetEmptyInnerCorner();
+		if(slot == null) slot = GetEmptyInnerSide();
 		if(slot == null) slot = GetEmptyCorner(); 
 		if(slot == null) slot = GetEmptySide();
-		if(slot == null) slot = GetEmptyInnerSide();
-		if(slot == null) slot = GetRandomEmptySlot();
+
 		//get the slot number via the name and store it in npcPiece so that we know what location to put the piece at
 		if(slot != null){
 			gameBoard.npcPiece = int.Parse(slot.GetComponent<SlotScript>().name);
@@ -271,7 +284,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 
 	public void HardAI(){
 		
-		gameBoard.difficultyX = 5;
+		gameBoard.difficultyX = 15;
 		GameObject slot = null;
 		
 		slot = WinOrBlock(); 
@@ -308,7 +321,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			
 			
 			if (gameBoard.currentPlayer == 1) {
-				Debug.Log ("____X___");
+				Debug.Log ("____X____");
 				gameBoard.AddPiece (0, slotNum);
 			} else if (GMO.aiDiffID == -1) {
 				Debug.Log ("____O____");
@@ -341,10 +354,11 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			
 			return;
 		}
-		
+		Debug.Log ("Current Player Before Switch"+gameBoard.currentPlayer);
 		gameBoard.currentPlayer++;
 		if (gameBoard.currentPlayer > 2)
 			gameBoard.currentPlayer = 1;
+		Debug.Log ("Current Player After Switch"+gameBoard.currentPlayer);
 	}
 	
 	void ScoreSystem(){
@@ -603,4 +617,6 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		//This is how to call IEnumerators to have delayed functions
 		StartCoroutine ("TieHighLight");
 	}
+
+
 }
