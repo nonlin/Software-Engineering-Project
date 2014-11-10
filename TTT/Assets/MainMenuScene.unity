@@ -224,6 +224,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 14205020}
+  - {fileID: 1878249535}
   - {fileID: 2105639300}
   - {fileID: 1107957965}
   - {fileID: 141402639}
@@ -511,7 +512,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 50544528}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &151238033
 GameObject:
   m_ObjectHideFlags: 0
@@ -1902,6 +1903,100 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 728595055}
+--- !u!1001 &756441695
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 50544528}
+    m_Modifications:
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 151
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -314
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 206
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 436.299988
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_Pivot.x
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_Pivot.y
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 856910d095f1a43e29406bdd32d4f670,
+        type: 3}
+    - target: {fileID: 11400000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+      propertyPath: m_Text
+      value: Goal is to align 4 of your pieces in row. That can be horizontally, vertically
+        or diagonally. First piece to get 4 in a row wins!
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+  m_RootGameObject: {fileID: 1878249534}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &780515175
 GameObject:
   m_ObjectHideFlags: 0
@@ -2943,7 +3038,7 @@ Transform:
   - {fileID: 1935191729}
   - {fileID: 893924255}
   m_Father: {fileID: 50544528}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &1125983461
 GameObject:
   m_ObjectHideFlags: 0
@@ -3134,7 +3229,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: af5d2d14895eaed4dae91d06b8ca164f, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1500000, guid: af5d2d14895eaed4dae91d06b8ca164f, type: 2}
       propertyPath: maxSize
@@ -5309,6 +5404,76 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1858738702}
+--- !u!1 &1878249534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: 6d61f951ae92e734eb2b1ab834e26e34, type: 2}
+  m_PrefabInternal: {fileID: 756441695}
+  serializedVersion: 4
+  m_Component:
+  - 224: {fileID: 1878249535}
+  - 222: {fileID: 1878249537}
+  - 114: {fileID: 1878249536}
+  m_Layer: 0
+  m_Name: Instructions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1878249535
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22400000, guid: 6d61f951ae92e734eb2b1ab834e26e34,
+    type: 2}
+  m_PrefabInternal: {fileID: 756441695}
+  m_GameObject: {fileID: 1878249534}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 50544528}
+  m_RootOrder: 1
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 151, y: -314}
+  m_SizeDelta: {x: 206, y: 436.299988}
+  m_Pivot: {x: .5, y: .5}
+--- !u!114 &1878249536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 11400000, guid: 6d61f951ae92e734eb2b1ab834e26e34,
+    type: 2}
+  m_PrefabInternal: {fileID: 756441695}
+  m_GameObject: {fileID: 1878249534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: .478431374, g: .533333361, b: .870588243, a: 1}
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 856910d095f1a43e29406bdd32d4f670, type: 3}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 1
+    m_MinSize: 10
+    m_MaxSize: 35
+    m_Alignment: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Goal is to align 4 of your pieces in row. That can be horizontally, vertically
+    or diagonally. First piece to get 4 in a row wins!
+--- !u!222 &1878249537
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 22200000, guid: 6d61f951ae92e734eb2b1ab834e26e34,
+    type: 2}
+  m_PrefabInternal: {fileID: 756441695}
+  m_GameObject: {fileID: 1878249534}
 --- !u!1 &1916831956
 GameObject:
   m_ObjectHideFlags: 0
@@ -6003,7 +6168,7 @@ RectTransform:
   m_Children:
   - {fileID: 1650789567}
   m_Father: {fileID: 50544528}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -70, y: -50}

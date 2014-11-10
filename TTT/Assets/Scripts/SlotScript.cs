@@ -545,6 +545,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		gameBoard.trapSetChance = new List<GameObject> ();
 		gameBoard.trapStopChance = new List<GameObject> ();
 		gameBoard.openCol = new List<GameObject> ();
+
 		//GameObject[] ColTraps;
 		GameObject slot = null;
 		int player;
@@ -555,17 +556,22 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			//Row
 			CheckFor2InARow(new Vector2[] {new Vector2(1,i),new Vector2(2,i),new Vector2(3,i),});
 		}
-		//Diag
 		CheckFor2InARow(new Vector2[] {new Vector2(3,3),new Vector2(2,2),new Vector2(1,1),});
-		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(2,2),new Vector2(1,3),});
 		//Other Diag Trap
-		CheckFor2InARow(new Vector2[] {new Vector2(4,4),new Vector2(3,3),new Vector2(2,2),});
-		CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,1),new Vector2(0,0),});
-		CheckFor2InARow(new Vector2[] {new Vector2(4,0),new Vector2(3,1),new Vector2(2,2),});
-		CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,3),new Vector2(0,4),});
-		//SetTrap
-		//if(gameBoard.trapSetChance.Count > 0) {
-		//	Debug.Log ("<color=red>SetTrap</color>"); return gameBoard.trapSetChance[Random.Range(0, gameBoard.trapSetChance.Count)];}
+		if(gameBoard.trapPreventedDiag1 == false){
+
+			CheckFor2InARow(new Vector2[] {new Vector2(4,4),new Vector2(3,3),new Vector2(2,2),});
+			CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,1),new Vector2(0,0),});
+			gameBoard.trapPreventedDiag1 = true;
+		}
+		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(2,2),new Vector2(1,3),});
+		if(gameBoard.trapPreventedDiag2 == false){
+
+			CheckFor2InARow(new Vector2[] {new Vector2(4,0),new Vector2(3,1),new Vector2(2,2),});
+			CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,3),new Vector2(0,4),});
+			gameBoard.trapPreventedDiag2 = true;
+		}
+
 		//prevent trap
 		if(gameBoard.trapStopChance.Count > 0){ 
 			Debug.Log ("<color=red>PreventTrap</color>"); return gameBoard.trapStopChance[Random.Range(0, gameBoard.trapStopChance.Count)];}
@@ -573,7 +579,12 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		return null;
 
 	}
+	void setTrap(){
 
+		//SetTrap
+		//if(gameBoard.trapSetChance.Count > 0) {
+		//	Debug.Log ("<color=red>SetTrap</color>"); return gameBoard.trapSetChance[Random.Range(0, gameBoard.trapSetChance.Count)];}
+	}
 	void CheckFor2InARow(Vector2[] coords){
 		int p1inRow = 0;
 		int p2inRow = 0;

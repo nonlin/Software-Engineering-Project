@@ -1222,73 +1222,6 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!1 &1201273416
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 224: {fileID: 1201273417}
-  - 222: {fileID: 1201273419}
-  - 114: {fileID: 1201273418}
-  m_Layer: 0
-  m_Name: Instructions
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1201273417
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1201273416}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1827498043}
-  m_RootOrder: 5
-  m_AnchorMin: {x: 1, y: .5}
-  m_AnchorMax: {x: 1, y: .5}
-  m_AnchoredPosition: {x: 151, y: 165.850006}
-  m_SizeDelta: {x: 206, y: 436.299988}
-  m_Pivot: {x: .5, y: .5}
---- !u!114 &1201273418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1201273416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: .478431374, g: .533333361, b: .870588243, a: 1}
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 0c6b25045a92f4e42aee67a77a9638ec, type: 3}
-    m_FontSize: 14
-    m_FontStyle: 0
-    m_BestFit: 1
-    m_MinSize: 10
-    m_MaxSize: 35
-    m_Alignment: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: Goal is to get 4 of your pieces in row. That can be horizontally, vertically
-    or diagonally. First piece to get 4 in a row wins!
---- !u!222 &1201273419
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1201273416}
 --- !u!1 &1320678856
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,7 +1770,6 @@ RectTransform:
   - {fileID: 1194950500}
   - {fileID: 1837075964}
   - {fileID: 431898336}
-  - {fileID: 1201273417}
   m_Father: {fileID: 738494896}
   m_RootOrder: 0
   m_AnchorMin: {x: 0, y: 0}
@@ -1995,6 +1927,8 @@ MonoBehaviour:
   highScorekey: 
   scoreText: {fileID: 764411073}
   diffText: {fileID: 431898337}
+  trapPreventedDiag1: 0
+  trapPreventedDiag2: 0
 --- !u!114 &1996448232
 MonoBehaviour:
   m_ObjectHideFlags: 0

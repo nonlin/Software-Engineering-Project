@@ -6,6 +6,7 @@ public class GameBoardScene : MonoBehaviour, IPointerDownHandler {
 
 //	private MenuManager mmScript;
 	public int sceneInt;
+	private 
 	void Start(){
 
 		//mmScript = GameObject.FindGameObjectWithTag ("Canvas").GetComponent<MenuManager> ();
@@ -17,7 +18,7 @@ public class GameBoardScene : MonoBehaviour, IPointerDownHandler {
 	}
 
 	public void OnPointerDown(PointerEventData data){
-
-		Application.LoadLevel (sceneInt);
+		if(sceneInt >= 0)
+			Application.LoadLevel (sceneInt);
 	}
 }

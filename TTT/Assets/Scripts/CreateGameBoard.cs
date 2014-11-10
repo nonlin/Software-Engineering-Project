@@ -35,6 +35,8 @@ public class CreateGameBoard : MonoBehaviour {
 	public string highScorekey;
 	public Text scoreText;
 	public Text diffText;
+	public bool trapPreventedDiag1 = false; 
+	public bool trapPreventedDiag2 = false; 
 	// Use this for initialization
 	void Start () {
 
