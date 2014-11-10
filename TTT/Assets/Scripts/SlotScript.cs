@@ -241,13 +241,14 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		gameBoard.difficultyX = 5;
 		GameObject slot = null;
 		
-		//slot = WinOrBlock(); 
-		if(slot == null) slot = PreventOrCreateTrap();
-		if(slot == null) slot = GetCenter(); 
-		if(slot == null) slot = GetEmptyInnerCorner();
-		if(slot == null) slot = GetEmptyInnerSide();
-		if(slot == null) slot = GetEmptyCorner(); 
-		if(slot == null) slot = GetEmptySide();
+		if(Random.value > 0.5f) slot = WinOrBlock(); 
+		if(slot == null && Random.value > 0.4f) slot = PreventOrCreateTrap();
+		if(slot == null&& Random.value > 0.3f) slot = GetCenter(); 
+		if(slot == null&& Random.value > 0.3f) slot = GetEmptyInnerCorner();
+		if(slot == null&& Random.value > 0.4f) slot = GetEmptyInnerSide();
+		if(slot == null&& Random.value > 0.4f) slot = GetEmptyCorner(); 
+		if(slot == null&& Random.value > 0.4f) slot = GetEmptySide();
+		if(slot == null) slot = GetRandomEmptySlot();
 
 		//get the slot number via the name and store it in npcPiece so that we know what location to put the piece at
 		if(slot != null){
@@ -264,13 +265,14 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		gameBoard.difficultyX = 10;
 		GameObject slot = null;
 		
-		slot = WinOrBlock(); 
-		//if(slot == null) slot = PreventOrCreateTrap();
-		if(slot == null) slot = GetCenter(); 
-		if(slot == null) slot = GetEmptyInnerCorner();
-		if(slot == null) slot = GetEmptyInnerSide();
-		if(slot == null) slot = GetEmptyCorner(); 
-		if(slot == null) slot = GetEmptySide();
+		if(Random.value > 0.9f) slot = WinOrBlock(); 
+		if(slot == null && Random.value > 0.7f) slot = PreventOrCreateTrap();
+		if(slot == null&& Random.value > 0.5f) slot = GetCenter(); 
+		if(slot == null&& Random.value > 0.5f) slot = GetEmptyInnerCorner();
+		if(slot == null&& Random.value > 0.8f) slot = GetEmptyInnerSide();
+		if(slot == null&& Random.value > 0.8f) slot = GetEmptyCorner(); 
+		if(slot == null&& Random.value > 0.8f) slot = GetEmptySide();
+		if(slot == null) slot = GetRandomEmptySlot();
 
 		//get the slot number via the name and store it in npcPiece so that we know what location to put the piece at
 		if(slot != null){
@@ -294,8 +296,8 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		if(slot == null) slot = GetEmptyInnerSide();
 		if(slot == null) slot = GetEmptyCorner(); 
 		if(slot == null) slot = GetEmptySide();
-
 		if(slot == null) slot = GetRandomEmptySlot();
+
 		//get the slot number via the name and store it in npcPiece so that we know what location to put the piece at
 		if(slot != null){
 			gameBoard.npcPiece = int.Parse(slot.GetComponent<SlotScript>().name);
