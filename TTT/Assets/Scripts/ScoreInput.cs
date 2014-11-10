@@ -9,23 +9,15 @@ public class ScoreInput : MonoBehaviour {
 	public List<int> Scores = new List<int>();
 	[SerializeField]
 	public InputField nameInputField;
-	
+	public Button submitButton;
 	//[SerializeField]
 	//private Button submitButton = null;
 
 	// Use this for initialization
 	void Start () {
-	
-		//SetGameScore ();
-		// Add listener to catch the submit (when set Submit button is pressed)
+		nameInputField.characterLimit = 15;
 		nameInputField.onEndEdit.AddListener((value) => SetInput(value));
-		// Add validation
-		//nameInputField.Validation = InputField.Validation.Alphanumeric;
-		//nameInputField.inp = InputField.ContentType.Name;
-		//nameInputField.characterValidation = InputField.ContentType.Alphanumeric;
-		
-		// This is a setup for a button that grabs the field value when pressed
-		//submitButton.onClick.AddListener(() => SetInput(nameInputField.value));
+		//submitButton.onClick.AddListener (() => SetInput(nameInputField.);
 	}
 	
 	// Update is called once per frame

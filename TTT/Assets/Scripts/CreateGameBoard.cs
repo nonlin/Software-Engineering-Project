@@ -39,6 +39,7 @@ public class CreateGameBoard : MonoBehaviour {
 	public bool trapPreventedDiag2 = false; 
 	public bool trapPreventedCross1 = false; 
 	public bool trapPreventedCross2 = false;
+	public bool checkFor2Result = false;
 	// Use this for initialization
 	void Start () {
 
