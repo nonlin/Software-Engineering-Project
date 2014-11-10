@@ -10,12 +10,6 @@ I'll update readme to reflect changes in unity versions.
 
 TODO
 
-Record Multiple User Scores (limited or Unlimited?)
-
-Medium AI
-
-Hard AI
-
 Add Vital Game Orianted Sound Effects and Design
 
 BUG TEST! 
