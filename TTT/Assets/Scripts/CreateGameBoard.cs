@@ -37,6 +37,8 @@ public class CreateGameBoard : MonoBehaviour {
 	public Text diffText;
 	public bool trapPreventedDiag1 = false; 
 	public bool trapPreventedDiag2 = false; 
+	public bool trapPreventedCross1 = false; 
+	public bool trapPreventedCross2 = false;
 	// Use this for initialization
 	void Start () {
 
