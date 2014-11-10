@@ -65,8 +65,9 @@ public class CreateGameBoard : MonoBehaviour {
 				GamePieceList.Add(new GamePiece());
 				aGrid[x,y] = slot;
 				//Debug.Log (aGrid[x,y].name);
-				slot.transform.parent = this.gameObject.transform;//Make it a child of this game object
-				slot.GetComponent<RectTransform>().localPosition = new Vector3(xPos - (x*105),yPos - (y*105),0);
+				slot.transform.SetParent(this.gameObject.transform);
+				//slot.transform.parent = this.gameObject.transform;//Make it a child of this game object
+				slot.GetComponent<RectTransform>().localPosition = new Vector3(xPos - (x*103),yPos - (y*103),0);
 				slotAmount++;
 			}
 
@@ -100,13 +101,25 @@ public class CreateGameBoard : MonoBehaviour {
 
 	public void ShowWinnerPrompt(){
 		 
-		if(currentPlayer == 1)
-		{
-			//prompt = "X gets 4 in a row. Player 1 wins!";
-			typerCS.startCR("Player 1 wins!");
-		} else {
-			typerCS.startCR("Player 2 wins!");
-			//prompt = "O gets 4 in a row. Player 2 wins!";
+		if(GMO.AIFirst == false){
+			if(currentPlayer == 1 )
+			{
+				//prompt = "X gets 4 in a row. Player 1 wins!";
+				typerCS.startCR("Player 1 wins!");
+			} else {
+				typerCS.startCR("Player 2 wins!");
+				//prompt = "O gets 4 in a row. Player 2 wins!";
+				}
+		}
+		else{//Swap Prompts because we know AI went first. Code wise Player Didn't change so we change the prompt here
+			if(currentPlayer == 1 )
+			{
+				//prompt = "X gets 4 in a row. Player 1 wins!";
+				typerCS.startCR("Player 2 wins!");
+			} else {
+				typerCS.startCR("Player 1 wins!");
+				//prompt = "O gets 4 in a row. Player 2 wins!";
+			}
 		}
 		SaveScore ();
 	}
@@ -124,10 +137,6 @@ public class CreateGameBoard : MonoBehaviour {
 
 		Application.LoadLevel(0);//load main menu
 		
-	}
-
-	void OnApplicationQuit() {
-
 	}
 
 	void SaveScore(){

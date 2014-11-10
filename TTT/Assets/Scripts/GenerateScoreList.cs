@@ -15,7 +15,8 @@ public class GenerateScoreList : MonoBehaviour {
 		for (int i = 0; i < 10; i++) {
 		
 			GO = Instantiate(ScoreEntryObject) as GameObject;
-			GO.transform.parent=transform;
+			GO.transform.SetParent(transform);
+			//GO.transform.parent=transform;
 			GO.name = "ScoreEntry"+entryNumber;
 			GO.GetComponent<RectTransform>().localScale = new Vector3(1, 1, 1);
 			GO.GetComponent<RectTransform>().localPosition = new Vector3(-19.5f,-200 + (50 * i),0);

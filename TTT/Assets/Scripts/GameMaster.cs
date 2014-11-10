@@ -17,7 +17,8 @@ public class GameMaster : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (Input.GetKey("escape"))
+			Application.Quit();
 	}
 
 	public void menuButtonSound(){
@@ -42,7 +43,6 @@ public class GameMaster : MonoBehaviour {
 	}
 
 	public void setFirst(int first){
-		
 		First = first;
 	}
 	public void setAIFirst(bool NPCFirst){

@@ -27,11 +27,11 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		scoreInput = GameObject.FindGameObjectWithTag ("ScorePrompt").GetComponent<ScoreInput> ();
 		gamePieceImage = gameObject.transform.GetChild (0).GetComponent<Image> ();
 		if(GMO.AIFirst == true) {
-
+			//Ai First true pick a slot (shouldn't matter which one) to have AI go first. 
 			//Simulate Fake Click to get the game started.
 			if (gameBoard.GamePieceList [slotNumber].gamePieceName == null) 
 			if (this.gameObject == gameBoard.aGrid[2,2] && GMO.aiDiffID >= 0) {
-				gameBoard.currentPlayer++;
+				gameBoard.currentPlayer++;//Have next player go which is AI
 				if(GMO.aiDiffID == 1 || GMO.aiDiffID == 0){gameBoard.diffText.text = "Easy"; EasyAI();}
 				if(GMO.aiDiffID == 2){gameBoard.diffText.text = "Normal"; MedAI ();}
 				if(GMO.aiDiffID == 3){gameBoard.diffText.text = "Hard"; HardAI ();}

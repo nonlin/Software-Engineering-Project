@@ -159,8 +159,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 1, y: .5}
   m_AnchorMax: {x: 1, y: .5}
-  m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: 43, y: 18}
+  m_AnchoredPosition: {x: 10.0000019, y: -1.60000002}
+  m_SizeDelta: {x: 43, y: 28.3999996}
   m_Pivot: {x: 0, y: .5}
 --- !u!114 &38232380
 MonoBehaviour:
@@ -1486,17 +1486,15 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 24
     m_Alignment: 4
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Hard
-
-'
+  m_Text: Hard
 --- !u!222 &603973901
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2008,8 +2006,8 @@ RectTransform:
   m_RootOrder: 1
   m_AnchorMin: {x: 1, y: .5}
   m_AnchorMax: {x: 1, y: .5}
-  m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: 43, y: 18}
+  m_AnchoredPosition: {x: 10, y: -1.60000002}
+  m_SizeDelta: {x: 43, y: 25.7999992}
   m_Pivot: {x: 0, y: .5}
 --- !u!114 &799159346
 MonoBehaviour:
@@ -3402,17 +3400,15 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 24
     m_Alignment: 4
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'ScoreBoard
-
-'
+  m_Text: ScoreBoard
 --- !u!222 &1251128763
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3974,7 +3970,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1254949585}
   toggleTransition: 1
   graphic: {fileID: 1638948131}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 471717409}
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -4176,15 +4172,15 @@ RectTransform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1543949610}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -1.74799997e-12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1333672586}
   m_RootOrder: 1
   m_AnchorMin: {x: 1, y: .5}
   m_AnchorMax: {x: 1, y: .5}
-  m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: 43, y: 18}
+  m_AnchoredPosition: {x: 8.80000019, y: 3.27830008e-07}
+  m_SizeDelta: {x: 69.0999985, y: 27.2000008}
   m_Pivot: {x: 0, y: .5}
 --- !u!114 &1543949612
 MonoBehaviour:
@@ -4211,7 +4207,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Ai First
+  m_Text: AI First
 --- !u!222 &1543949613
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4290,7 +4286,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1028662329}
   toggleTransition: 1
   graphic: {fileID: 695666660}
-  m_Group: {fileID: 0}
+  m_Group: {fileID: 471717409}
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
@@ -4360,9 +4356,9 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 24
     m_Alignment: 4
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -4487,17 +4483,15 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 24
     m_Alignment: 4
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'SinglePlayer
-
-'
+  m_Text: SinglePlayer
 --- !u!222 &1650379429
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4816,8 +4810,8 @@ MonoBehaviour:
   ButtonSelect: {fileID: 8300000, guid: 1c7115e7172f60d43a6a8f4898c26988, type: 3}
   effectVol: 1
   aiDiffID: 0
-  First: 1
-  AIFirst: 0
+  First: 2
+  AIFirst: 1
 --- !u!82 &1791899119
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5091,9 +5085,9 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 24
     m_Alignment: 4
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -6217,17 +6211,15 @@ MonoBehaviour:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 14
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 24
     m_Alignment: 4
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'TwoPlayers
-
-'
+  m_Text: TwoPlayers
 --- !u!222 &2133992342
 CanvasRenderer:
   m_ObjectHideFlags: 0

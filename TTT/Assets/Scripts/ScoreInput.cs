@@ -8,7 +8,7 @@ public class ScoreInput : MonoBehaviour {
 	public string Score;
 	public List<int> Scores = new List<int>();
 	[SerializeField]
-	private InputField nameInputField;
+	public InputField nameInputField;
 	
 	//[SerializeField]
 	//private Button submitButton = null;
@@ -18,9 +18,11 @@ public class ScoreInput : MonoBehaviour {
 	
 		//SetGameScore ();
 		// Add listener to catch the submit (when set Submit button is pressed)
-		nameInputField.onSubmit.AddListener((value) => SetInput(value));
+		nameInputField.onEndEdit.AddListener((value) => SetInput(value));
 		// Add validation
-		nameInputField.validation = InputField.Validation.Alphanumeric;
+		//nameInputField.Validation = InputField.Validation.Alphanumeric;
+		//nameInputField.inp = InputField.ContentType.Name;
+		//nameInputField.characterValidation = InputField.ContentType.Alphanumeric;
 		
 		// This is a setup for a button that grabs the field value when pressed
 		//submitButton.onClick.AddListener(() => SetInput(nameInputField.value));
