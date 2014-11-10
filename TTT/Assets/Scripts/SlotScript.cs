@@ -571,7 +571,10 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,3),new Vector2(0,4),});
 			gameBoard.trapPreventedDiag2 = true;
 		}
-
+		CheckFor2InARow(new Vector2[] {new Vector2(0,1),new Vector2(1,2),new Vector2(2,3),});
+		CheckFor2InARow(new Vector2[] {new Vector2(1,0),new Vector2(2,1),new Vector2(3,2),});
+		CheckFor2InARow(new Vector2[] {new Vector2(3,0),new Vector2(2,1),new Vector2(1,2),});
+		CheckFor2InARow(new Vector2[] {new Vector2(4,1),new Vector2(3,2),new Vector2(2,3),});
 		//prevent trap
 		if(gameBoard.trapStopChance.Count > 0){ 
 			Debug.Log ("<color=red>PreventTrap</color>"); return gameBoard.trapStopChance[Random.Range(0, gameBoard.trapStopChance.Count)];}
