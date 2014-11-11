@@ -17,7 +17,7 @@ public class ScoreInput : MonoBehaviour {
 	void Start () {
 		nameInputField.characterLimit = 15;
 		nameInputField.onEndEdit.AddListener((value) => SetInput(value));
-		//submitButton.onClick.AddListener (() => SetInput(nameInputField.);
+		//submitButton.onClick.AddListener (() => SetInput(nameInputField.text));
 	}
 	
 	// Update is called once per frame
@@ -38,6 +38,7 @@ public class ScoreInput : MonoBehaviour {
 				string[] split = PlayerPrefs.GetString ("Entry"+i).Split (' ');
 				Debug.Log ("<color=white> ENTRY: </color>" + PlayerPrefs.GetString("Entry"+i));
 				//check that entries score with the new score we have
+				//if(int.TryParse(split[1], out i))
 				if(int.Parse(split[1]) < int.Parse (Score) ){
 					//if the score we have is greater than the score already stored swap and save?
 					//OlsScore and name = to score and name already stored.
@@ -49,6 +50,10 @@ public class ScoreInput : MonoBehaviour {
 					Score = oldScore.ToString();
 					name = oldName;
 				}
+				//else {
+				//	Debug.Log("Parsing failed");
+				//	Debug.Log(split[1]+", "+split[1].Length);
+				//}
 			}
 			//else if we don't have an entry at EntryLocation:i, insert it? 
 			else{

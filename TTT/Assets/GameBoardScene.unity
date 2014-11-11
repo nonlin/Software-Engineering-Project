@@ -686,7 +686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &644679476
 RectTransform:
   m_ObjectHideFlags: 0
@@ -700,10 +700,10 @@ RectTransform:
   - {fileID: 978429723}
   m_Father: {fileID: 1837075964}
   m_RootOrder: 3
-  m_AnchorMin: {x: 0, y: .5}
-  m_AnchorMax: {x: 0, y: .5}
-  m_AnchoredPosition: {x: 353.5, y: 164.5}
-  m_SizeDelta: {x: 70.6000061, y: 30}
+  m_AnchorMin: {x: .5, y: .5}
+  m_AnchorMax: {x: .5, y: .5}
+  m_AnchoredPosition: {x: -120.5, y: 164.5}
+  m_SizeDelta: {x: 70.5999756, y: 30}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &644679477
 MonoBehaviour:
@@ -2080,6 +2080,7 @@ MonoBehaviour:
   GamePieceList: []
   BlockChance: []
   WinChance: []
+  trapToStop: {fileID: 0}
   trapSetChance: []
   trapStopChance: []
   openCol: []
@@ -2102,6 +2103,7 @@ MonoBehaviour:
   trapPreventedDiag2: 0
   trapPreventedCross1: 0
   trapPreventedCross2: 0
+  checkFor2Result: 0
 --- !u!114 &1996448232
 MonoBehaviour:
   m_ObjectHideFlags: 0

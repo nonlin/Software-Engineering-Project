@@ -244,8 +244,9 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		slot = WinOrBlock(); 
 		if(slot == null && Random.value > 0.4f) slot = PreventOrCreateTrap();
 		if(slot == null&& Random.value > 0.3f) slot = GetCenter(); 
-		if(slot == null&& Random.value > 0.3f) slot = GetEmptyInnerCorner();
 		if(slot == null&& Random.value > 0.4f) slot = GetEmptyInnerSide();
+		if(slot == null&& Random.value > 0.3f) slot = GetEmptyInnerCorner();
+
 		if(slot == null&& Random.value > 0.4f) slot = GetEmptyCorner(); 
 		if(slot == null&& Random.value > 0.4f) slot = GetEmptySide();
 		if(slot == null) slot = GetRandomEmptySlot();
@@ -543,63 +544,85 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	}
 
 	GameObject PreventOrCreateTrap(){
-			
+		
 		gameBoard.trapSetChance = new List<GameObject> ();
 		gameBoard.trapStopChance = new List<GameObject> ();
 		gameBoard.openCol = new List<GameObject> ();
-
+		
 		//GameObject[] ColTraps;
 		GameObject slot = null;
 		int player;
 
-		for(int i = 0; i < 5; i++){
-			//Col
-			CheckFor2InARow(new Vector2[] {new Vector2(i,1),new Vector2(i,2),new Vector2(i,3),});
-			//Row
-			CheckFor2InARow(new Vector2[] {new Vector2(1,i),new Vector2(2,i),new Vector2(3,i),});
-		}
-		CheckFor2InARow(new Vector2[] {new Vector2(3,3),new Vector2(2,2),new Vector2(1,1),});
-		//Other Diag Trap
-		if(gameBoard.trapPreventedDiag1 == false){
-			Debug.Log ("<color = green>DiagTrap 1</color>");
-			if(CheckFor2InARow(new Vector2[] {new Vector2(4,4),new Vector2(3,3),new Vector2(2,2),})) gameBoard.trapPreventedDiag1 = true;;
-			if(CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,1),new Vector2(0,0),})) gameBoard.trapPreventedDiag1 = true;;
 
-		}
-
-		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(2,2),new Vector2(1,3),});
-		if(gameBoard.trapPreventedDiag2 == false){
-			Debug.Log ("<color = green>DiagTrap 2</color>");
-			if(CheckFor2InARow(new Vector2[] {new Vector2(4,0),new Vector2(3,1),new Vector2(2,2),})) gameBoard.trapPreventedDiag2 = true;;
-			if(CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,3),new Vector2(0,4),})) gameBoard.trapPreventedDiag2 = true;;
-
-		}
-		//Cross Trap
-		if(gameBoard.trapPreventedCross1 == false){
-			Debug.Log ("<color = green>CrossTrap 1</color>");
-			if(CheckFor2InARow(new Vector2[] {new Vector2(2,0),new Vector2(2,1),new Vector2(2,2),})) gameBoard.trapPreventedCross1 = true;;
-			if(CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(2,3),new Vector2(2,4),})) gameBoard.trapPreventedCross1 = true;;
-			if(CheckFor2InARow(new Vector2[] {new Vector2(2,1),new Vector2(2,2),new Vector2(2,3),})) gameBoard.trapPreventedCross1 = true;;
-
-		}
-		if(gameBoard.trapPreventedCross2 == false){
-			Debug.Log ("<color = green>CrossTrap 2</color>");
-			if(CheckFor2InARow(new Vector2[] {new Vector2(4,2),new Vector2(3,2),new Vector2(2,2),})) gameBoard.trapPreventedCross2 = true;;
-			if(CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,2),new Vector2(0,2),})) gameBoard.trapPreventedCross2 = true;;
-			if(CheckFor2InARow(new Vector2[] {new Vector2(3,2),new Vector2(2,2),new Vector2(1,2),})) gameBoard.trapPreventedCross2 = true;;
-
-		}
-		Debug.Log ("<color = green>Diag 4 Part</color>");
 		CheckFor2InARow(new Vector2[] {new Vector2(0,1),new Vector2(1,2),new Vector2(2,3),});
 		CheckFor2InARow(new Vector2[] {new Vector2(1,0),new Vector2(2,1),new Vector2(3,2),});
 		CheckFor2InARow(new Vector2[] {new Vector2(3,0),new Vector2(2,1),new Vector2(1,2),});
 		CheckFor2InARow(new Vector2[] {new Vector2(4,1),new Vector2(3,2),new Vector2(2,3),});
+		//Need to check center row and col
+		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(3,2),new Vector2(3,3),});
+		CheckFor2InARow(new Vector2[] {new Vector2(1,1),new Vector2(1,2),new Vector2(1,3),});
+		CheckFor2InARow(new Vector2[] {new Vector2(4,1),new Vector2(4,2),new Vector2(4,3),});
+		CheckFor2InARow(new Vector2[] {new Vector2(0,1),new Vector2(0,2),new Vector2(0,3),});
+		//row
+		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(2,1),new Vector2(1,1),});
+		CheckFor2InARow(new Vector2[] {new Vector2(3,3),new Vector2(2,3),new Vector2(1,3),});
+		CheckFor2InARow(new Vector2[] {new Vector2(3,4),new Vector2(2,4),new Vector2(1,4),});
+		CheckFor2InARow(new Vector2[] {new Vector2(3,0),new Vector2(2,0),new Vector2(1,0),});
+		/*for(int i = 0; i < 5; i++){
+			Debug.Log ("<color=green>Row/COl</color>");
+			//Col
+			CheckFor2InARow(new Vector2[] {new Vector2(i,1),new Vector2(i,2),new Vector2(i,3),});
+			//Row
+			CheckFor2InARow(new Vector2[] {new Vector2(1,i),new Vector2(2,i),new Vector2(3,i),});
+		/*}*/
 
+		
+		//Other Diag Trap
+		if(gameBoard.trapPreventedDiag1 == false){
+			Debug.Log ("<color=green>DiagTrap 1</color>");
+
+			if(CheckFor2InARow(new Vector2[] {new Vector2(4,4),new Vector2(3,3),new Vector2(2,2),})){Debug.Log ("<color=green>DiagCross 1</color>"); gameBoard.trapPreventedDiag1 = true;}
+			if(CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,1),new Vector2(0,0),})){Debug.Log ("<color=green>DiagCross 1</color>"); gameBoard.trapPreventedDiag1 = true;}
+			if(CheckFor2InARow(new Vector2[] {new Vector2(3,3),new Vector2(2,2),new Vector2(1,1),})){Debug.Log ("<color=green>DiagCross 1</color>"); gameBoard.trapPreventedDiag1 = true;}
+		}
+		
+		
+		if(gameBoard.trapPreventedDiag2 == false){
+			Debug.Log ("<color=green>DiagTrap 2</color>");
+
+			if(CheckFor2InARow(new Vector2[] {new Vector2(4,0),new Vector2(3,1),new Vector2(2,2),})){Debug.Log ("<color=green>DiagCross2-2</color>"); gameBoard.trapPreventedDiag2 = true;}
+			if(CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,3),new Vector2(0,4),})){Debug.Log ("<color=green>DiagCross2-3</color>"); gameBoard.trapPreventedDiag2 = true;}
+			if(CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(2,2),new Vector2(1,3),})){Debug.Log ("<color=green>DiagCross2-1</color>"); gameBoard.trapPreventedDiag2 = true;}
+			
+		}
+		//Cross Trap
+
+		if(gameBoard.trapPreventedCross1 == false){
+			Debug.Log ("<color=green>CrossTrap 1</color>");
+
+			if(CheckFor2InARow(new Vector2[] {new Vector2(2,0),new Vector2(2,1),new Vector2(2,2),})){Debug.Log ("<color=green>MainCross1-2</color>"); gameBoard.trapPreventedCross1 = true;}
+			if(CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(2,3),new Vector2(2,4),})){Debug.Log ("<color=green>MainCross1-2</color>"); gameBoard.trapPreventedCross1 = true;}
+			if(CheckFor2InARow(new Vector2[] {new Vector2(2,1),new Vector2(2,2),new Vector2(2,3),})) {Debug.Log ("<color=green>MainCross1-1</color>"); gameBoard.trapPreventedCross1 = true;}
+			
+		}
+
+		if(gameBoard.trapPreventedCross2 == false){
+			Debug.Log ("<color=green>CrossTrap 2</color>");
+
+			if(CheckFor2InARow(new Vector2[] {new Vector2(4,2),new Vector2(3,2),new Vector2(2,2),})){Debug.Log ("<color=green>MainCross 2-2</color>"); gameBoard.trapPreventedCross2 = true;}
+			if(CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,2),new Vector2(0,2),})){Debug.Log ("<color=green>MainCross 2-3</color>"); gameBoard.trapPreventedCross2 = true;}
+			if(CheckFor2InARow(new Vector2[] {new Vector2(3,2),new Vector2(2,2),new Vector2(1,2),})){Debug.Log ("<color=green>MainCross 2-1</color>"); gameBoard.trapPreventedCross2 = true;}
+			
+		}
 
 		//prevent trap
-		if(gameBoard.trapStopChance.Count > 0){ 
-			Debug.Log ("<color=red>PreventTrap</color>"); return gameBoard.trapStopChance[Random.Range(0, gameBoard.trapStopChance.Count)];}
-		
+		if (gameBoard.trapToStop != null)
+		if(gameBoard.trapToStop.GetComponent<SlotScript>().player == 0){ 
+			Debug.Log ("<color=red>PreventTrap Returning :!</color>" + gameBoard.trapToStop.name);
+			return gameBoard.trapToStop;}//trapStopChance[Random.Range(0, gameBoard.trapStopChance.Count)];}
+
+		//if(gameBoard.trapSetChance.Count > 0) {
+		//	Debug.Log ("<color=red>SetTrap</color>"); return gameBoard.trapSetChance[Random.Range(0, gameBoard.trapSetChance.Count)];}
 		return null;
 
 	}
@@ -642,8 +665,9 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 				return false;
 			}
 			else if(p1inRow == 2){
-				
-				gameBoard.trapStopChance.Add (slot);
+				//gameBoard.trapStopChance.Add (slot);
+				gameBoard.trapToStop = slot; 
+				Debug.Log ("<color=red>WE Made it to trapslot is :!</color>" + gameBoard.trapToStop.name);
 				return true;
 			}
 		}

@@ -10,6 +10,7 @@ public class CreateGameBoard : MonoBehaviour {
 	public List<GameObject> BlockChance;// = new List<GameObject>();
 	public List<GameObject> WinChance; //= new List<GameObject>();
 	//--
+	public GameObject trapToStop;
 	public List<GameObject> trapSetChance;// = new List<GameObject> ();
 	public List<GameObject> trapStopChance;// = new List<GameObject> ();
 	public List<GameObject> openCol = new List<GameObject> ();
