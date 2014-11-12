@@ -14,7 +14,7 @@ Platform assembly: C:\Users\George\Documents\GitHub\Software-Engineering-Project
 Loading C:\Users\George\Documents\GitHub\Software-Engineering-Project\TTT\TTTv2.7.5_Data\Managed\Assembly-UnityScript.dll into Unity Child Domain
 Platform assembly: C:\Users\George\Documents\GitHub\Software-Engineering-Project\TTT\TTTv2.7.5_Data\Managed\UnityEngine.UI.dll (this message is harmless)
 Loading C:\Users\George\Documents\GitHub\Software-Engineering-Project\TTT\TTTv2.7.5_Data\Managed\UnityEngine.UI.dll into Unity Child Domain
-- Completed reload, in  0.083 seconds
+- Completed reload, in  0.060 seconds
 desktop: 1920x1080 60Hz; virtual: 3200x1080 at -1280,0
 <RI> Initializing input.
 <RI> Input initialized.

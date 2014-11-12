@@ -553,21 +553,16 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		GameObject slot = null;
 		int player;
 
-
+		//Diag 4's
 		CheckFor2InARow(new Vector2[] {new Vector2(0,1),new Vector2(1,2),new Vector2(2,3),});
 		CheckFor2InARow(new Vector2[] {new Vector2(1,0),new Vector2(2,1),new Vector2(3,2),});
 		CheckFor2InARow(new Vector2[] {new Vector2(3,0),new Vector2(2,1),new Vector2(1,2),});
 		CheckFor2InARow(new Vector2[] {new Vector2(4,1),new Vector2(3,2),new Vector2(2,3),});
-		//Need to check center row and col
-		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(3,2),new Vector2(3,3),});
-		CheckFor2InARow(new Vector2[] {new Vector2(1,1),new Vector2(1,2),new Vector2(1,3),});
-		CheckFor2InARow(new Vector2[] {new Vector2(4,1),new Vector2(4,2),new Vector2(4,3),});
-		CheckFor2InARow(new Vector2[] {new Vector2(0,1),new Vector2(0,2),new Vector2(0,3),});
-		//row
-		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(2,1),new Vector2(1,1),});
-		CheckFor2InARow(new Vector2[] {new Vector2(3,3),new Vector2(2,3),new Vector2(1,3),});
-		CheckFor2InARow(new Vector2[] {new Vector2(3,4),new Vector2(2,4),new Vector2(1,4),});
-		CheckFor2InARow(new Vector2[] {new Vector2(3,0),new Vector2(2,0),new Vector2(1,0),});
+		//Diag Check Corner Strategy
+		CheckFor2InARow(new Vector2[] {new Vector2(2,3),new Vector2(1,3),new Vector2(1,2),});
+		CheckFor2InARow(new Vector2[] {new Vector2(2,1),new Vector2(1,1),new Vector2(1,2),});
+		CheckFor2InARow(new Vector2[] {new Vector2(3,2),new Vector2(3,1),new Vector2(2,1),});
+		CheckFor2InARow(new Vector2[] {new Vector2(3,2),new Vector2(3,3),new Vector2(2,3),});
 		/*for(int i = 0; i < 5; i++){
 			Debug.Log ("<color=green>Row/COl</color>");
 			//Col
@@ -578,7 +573,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 
 		
 		//Other Diag Trap
-		if(gameBoard.trapPreventedDiag1 == false){
+		if(gameBoard.trapPreventedDiag1 == false && (gameBoard.aGrid[3,3].GetComponent<SlotScript>().player == 0 || gameBoard.aGrid[2,2].GetComponent<SlotScript>().player == 0 || gameBoard.aGrid[1,1].GetComponent<SlotScript>().player == 0)){
 			Debug.Log ("<color=green>DiagTrap 1</color>");
 
 			if(CheckFor2InARow(new Vector2[] {new Vector2(4,4),new Vector2(3,3),new Vector2(2,2),})){Debug.Log ("<color=green>DiagCross 1</color>"); gameBoard.trapPreventedDiag1 = true;}
@@ -587,17 +582,28 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		}
 		
 		
-		if(gameBoard.trapPreventedDiag2 == false){
+		if(gameBoard.trapPreventedDiag2 == false && (gameBoard.aGrid[3,1].GetComponent<SlotScript>().player == 0 || gameBoard.aGrid[2,2].GetComponent<SlotScript>().player == 0 ||gameBoard.aGrid[1,3].GetComponent<SlotScript>().player == 0)){
 			Debug.Log ("<color=green>DiagTrap 2</color>");
 
 			if(CheckFor2InARow(new Vector2[] {new Vector2(4,0),new Vector2(3,1),new Vector2(2,2),})){Debug.Log ("<color=green>DiagCross2-2</color>"); gameBoard.trapPreventedDiag2 = true;}
 			if(CheckFor2InARow(new Vector2[] {new Vector2(2,2),new Vector2(1,3),new Vector2(0,4),})){Debug.Log ("<color=green>DiagCross2-3</color>"); gameBoard.trapPreventedDiag2 = true;}
 			if(CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(2,2),new Vector2(1,3),})){Debug.Log ("<color=green>DiagCross2-1</color>"); gameBoard.trapPreventedDiag2 = true;}
+
 			
 		}
+		//Need to check center row and col
+		CheckFor2InARow(new Vector2[] {new Vector2(4,1),new Vector2(4,2),new Vector2(4,3),});
+		CheckFor2InARow(new Vector2[] {new Vector2(0,1),new Vector2(0,2),new Vector2(0,3),});
+		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(3,2),new Vector2(3,3),});
+		CheckFor2InARow(new Vector2[] {new Vector2(1,1),new Vector2(1,2),new Vector2(1,3),});
+		//row
+		CheckFor2InARow(new Vector2[] {new Vector2(3,4),new Vector2(2,4),new Vector2(1,4),});
+		CheckFor2InARow(new Vector2[] {new Vector2(3,0),new Vector2(2,0),new Vector2(1,0),});
+		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(2,1),new Vector2(1,1),});
+		CheckFor2InARow(new Vector2[] {new Vector2(3,3),new Vector2(2,3),new Vector2(1,3),});
 		//Cross Trap
 
-		if(gameBoard.trapPreventedCross1 == false){
+		if(gameBoard.trapPreventedCross1 == false && (gameBoard.aGrid[2,1].GetComponent<SlotScript>().player == 0 || gameBoard.aGrid[2,2].GetComponent<SlotScript>().player == 0 ||gameBoard.aGrid[2,3].GetComponent<SlotScript>().player == 0)){
 			Debug.Log ("<color=green>CrossTrap 1</color>");
 
 			if(CheckFor2InARow(new Vector2[] {new Vector2(2,0),new Vector2(2,1),new Vector2(2,2),})){Debug.Log ("<color=green>MainCross1-2</color>"); gameBoard.trapPreventedCross1 = true;}
@@ -606,7 +612,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			
 		}
 
-		if(gameBoard.trapPreventedCross2 == false){
+			if(gameBoard.trapPreventedCross2 == false && (gameBoard.aGrid[3,2].GetComponent<SlotScript>().player == 0 || gameBoard.aGrid[2,2].GetComponent<SlotScript>().player == 0 || gameBoard.aGrid[1,2].GetComponent<SlotScript>().player == 0)){
 			Debug.Log ("<color=green>CrossTrap 2</color>");
 
 			if(CheckFor2InARow(new Vector2[] {new Vector2(4,2),new Vector2(3,2),new Vector2(2,2),})){Debug.Log ("<color=green>MainCross 2-2</color>"); gameBoard.trapPreventedCross2 = true;}
@@ -621,8 +627,8 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			Debug.Log ("<color=red>PreventTrap Returning :!</color>" + gameBoard.trapToStop.name);
 			return gameBoard.trapToStop;}//trapStopChance[Random.Range(0, gameBoard.trapStopChance.Count)];}
 
-		//if(gameBoard.trapSetChance.Count > 0) {
-		//	Debug.Log ("<color=red>SetTrap</color>"); return gameBoard.trapSetChance[Random.Range(0, gameBoard.trapSetChance.Count)];}
+		if(gameBoard.trapSetChance.Count > 0) {
+			Debug.Log ("<color=red>SetTrap</color>"); return gameBoard.trapSetChance[Random.Range(0, gameBoard.trapSetChance.Count)];}
 		return null;
 
 	}
