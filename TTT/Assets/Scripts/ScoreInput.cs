@@ -16,6 +16,7 @@ public class ScoreInput : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		nameInputField.characterLimit = 15;
+		nameInputField.characterValidation = InputField.CharacterValidation.Alphanumeric;
 		nameInputField.onEndEdit.AddListener((value) => SetInput(value));
 		//submitButton.onClick.AddListener (() => SetInput(nameInputField.text));
 	}

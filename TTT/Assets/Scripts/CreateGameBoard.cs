@@ -11,6 +11,7 @@ public class CreateGameBoard : MonoBehaviour {
 	public List<GameObject> WinChance; //= new List<GameObject>();
 	//--
 	public GameObject trapToStop;
+	public GameObject trapToStart;
 	public List<GameObject> trapSetChance;// = new List<GameObject> ();
 	public List<GameObject> trapStopChance;// = new List<GameObject> ();
 	public List<GameObject> openCol = new List<GameObject> ();
@@ -23,7 +24,7 @@ public class CreateGameBoard : MonoBehaviour {
 	public int npcPiece; 
 	public int slotAmount;
 	public GameObject[,] aGrid = new GameObject[5,5];
-	private int xPos = 180;
+	private int xPos = 240;
 	private int yPos = 250;
 	//public string prompt;
 	private Typer typerCS;

@@ -571,7 +571,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Beta 2.7.6
+  m_Text: Beta 2.7.7
 --- !u!222 &151238036
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1347,7 +1347,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
---- !u!1001 &548662294
+--- !u!1001 &552663755
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -1425,6 +1425,10 @@ Prefab:
     - target: {fileID: 22400002, guid: 08926557924ce0c4b98d1849f139991c, type: 2}
       propertyPath: m_Pivot.y
       value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 08926557924ce0c4b98d1849f139991c, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: 08926557924ce0c4b98d1849f139991c, type: 2}
       propertyPath: m_IsActive
@@ -2493,7 +2497,7 @@ EllipsoidParticleEmitter:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100002, guid: 08926557924ce0c4b98d1849f139991c, type: 2}
-  m_PrefabInternal: {fileID: 548662294}
+  m_PrefabInternal: {fileID: 552663755}
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 919582119}
@@ -2512,7 +2516,7 @@ RectTransform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 22400002, guid: 08926557924ce0c4b98d1849f139991c,
     type: 2}
-  m_PrefabInternal: {fileID: 548662294}
+  m_PrefabInternal: {fileID: 552663755}
   m_GameObject: {fileID: 919582118}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -2531,7 +2535,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400002, guid: 08926557924ce0c4b98d1849f139991c,
     type: 2}
-  m_PrefabInternal: {fileID: 548662294}
+  m_PrefabInternal: {fileID: 552663755}
   m_GameObject: {fileID: 919582118}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -2558,14 +2562,14 @@ CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 22200002, guid: 08926557924ce0c4b98d1849f139991c,
     type: 2}
-  m_PrefabInternal: {fileID: 548662294}
+  m_PrefabInternal: {fileID: 552663755}
   m_GameObject: {fileID: 919582118}
 --- !u!114 &919582122
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400004, guid: 08926557924ce0c4b98d1849f139991c,
     type: 2}
-  m_PrefabInternal: {fileID: 548662294}
+  m_PrefabInternal: {fileID: 552663755}
   m_GameObject: {fileID: 919582118}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -3792,7 +3796,7 @@ CanvasRenderer:
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100000, guid: 08926557924ce0c4b98d1849f139991c, type: 2}
-  m_PrefabInternal: {fileID: 548662294}
+  m_PrefabInternal: {fileID: 552663755}
   serializedVersion: 4
   m_Component:
   - 224: {fileID: 1374802032}
@@ -3810,7 +3814,7 @@ RectTransform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 22400000, guid: 08926557924ce0c4b98d1849f139991c,
     type: 2}
-  m_PrefabInternal: {fileID: 548662294}
+  m_PrefabInternal: {fileID: 552663755}
   m_GameObject: {fileID: 1374802031}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -3820,7 +3824,7 @@ RectTransform:
   m_RootOrder: 0
   m_AnchorMin: {x: .5, y: 1}
   m_AnchorMax: {x: .5, y: 1}
-  m_AnchoredPosition: {x: 3.5, y: -23}
+  m_AnchoredPosition: {x: 219, y: -23}
   m_SizeDelta: {x: 210.27002, y: 27.1000004}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1374802033
@@ -3828,7 +3832,7 @@ MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 11400000, guid: 08926557924ce0c4b98d1849f139991c,
     type: 2}
-  m_PrefabInternal: {fileID: 548662294}
+  m_PrefabInternal: {fileID: 552663755}
   m_GameObject: {fileID: 1374802031}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -3855,7 +3859,7 @@ CanvasRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 22200000, guid: 08926557924ce0c4b98d1849f139991c,
     type: 2}
-  m_PrefabInternal: {fileID: 548662294}
+  m_PrefabInternal: {fileID: 552663755}
   m_GameObject: {fileID: 1374802031}
 --- !u!1 &1408279329
 GameObject:

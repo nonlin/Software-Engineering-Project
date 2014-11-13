@@ -295,8 +295,8 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		if(slot == null) slot = GetCenter(); 
 		if(slot == null) slot = GetEmptyInnerCorner();
 		if(slot == null) slot = GetEmptyInnerSide();
-		if(slot == null) slot = GetEmptyCorner(); 
 		if(slot == null) slot = GetEmptySide();
+		if(slot == null) slot = GetEmptyCorner(); 
 		if(slot == null) slot = GetRandomEmptySlot();
 
 		//get the slot number via the name and store it in npcPiece so that we know what location to put the piece at
@@ -345,6 +345,10 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			
 			gameBoard.gameOver = true;
 			Debug.Log ("Player " + slot.GetComponent<SlotScript>().player + " Won!");
+			//Since AI is always palyer 2 if the last winning slot is the AI half the score
+			if(slot.GetComponent<SlotScript>().player ==  2){
+				gameBoard.totalScore = (int)gameBoard.totalScore/2;
+			}
 			gameBoard.ShowWinnerPrompt ();
 			
 			return;
@@ -591,18 +595,18 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 
 			
 		}
-		//Need to check center row and col
-		CheckFor2InARow(new Vector2[] {new Vector2(4,1),new Vector2(4,2),new Vector2(4,3),});
-		CheckFor2InARow(new Vector2[] {new Vector2(0,1),new Vector2(0,2),new Vector2(0,3),});
-		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(3,2),new Vector2(3,3),});
-		CheckFor2InARow(new Vector2[] {new Vector2(1,1),new Vector2(1,2),new Vector2(1,3),});
+		//Col
+		CheckFor2InARow(new Vector2[] {new Vector2(4,1),new Vector2(4,2),new Vector2(4,3),});//Outer Left Side
+		CheckFor2InARow(new Vector2[] {new Vector2(0,1),new Vector2(0,2),new Vector2(0,3),});//Outer Right Side
+		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(3,2),new Vector2(3,3),});//Inner Left Side
+		CheckFor2InARow(new Vector2[] {new Vector2(1,1),new Vector2(1,2),new Vector2(1,3),});//Inner Right Side
 		//row
-		CheckFor2InARow(new Vector2[] {new Vector2(3,4),new Vector2(2,4),new Vector2(1,4),});
-		CheckFor2InARow(new Vector2[] {new Vector2(3,0),new Vector2(2,0),new Vector2(1,0),});
-		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(2,1),new Vector2(1,1),});
-		CheckFor2InARow(new Vector2[] {new Vector2(3,3),new Vector2(2,3),new Vector2(1,3),});
-		//Cross Trap
+		CheckFor2InARow(new Vector2[] {new Vector2(3,4),new Vector2(2,4),new Vector2(1,4),});//Outer Bot Side
+		CheckFor2InARow(new Vector2[] {new Vector2(3,0),new Vector2(2,0),new Vector2(1,0),});//Outer Top Side
+		CheckFor2InARow(new Vector2[] {new Vector2(3,1),new Vector2(2,1),new Vector2(1,1),});//Inner Top Side
+		CheckFor2InARow(new Vector2[] {new Vector2(3,3),new Vector2(2,3),new Vector2(1,3),});//Inner Bot Side
 
+		//Cross Trap
 		if(gameBoard.trapPreventedCross1 == false && (gameBoard.aGrid[2,1].GetComponent<SlotScript>().player == 0 || gameBoard.aGrid[2,2].GetComponent<SlotScript>().player == 0 ||gameBoard.aGrid[2,3].GetComponent<SlotScript>().player == 0)){
 			Debug.Log ("<color=green>CrossTrap 1</color>");
 
@@ -621,23 +625,37 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			
 		}
 
-		//prevent trap
-		if (gameBoard.trapToStop != null)
-		if(gameBoard.trapToStop.GetComponent<SlotScript>().player == 0){ 
-			Debug.Log ("<color=red>PreventTrap Returning :!</color>" + gameBoard.trapToStop.name);
-			return gameBoard.trapToStop;}//trapStopChance[Random.Range(0, gameBoard.trapStopChance.Count)];}
-
-		if(gameBoard.trapSetChance.Count > 0) {
-			Debug.Log ("<color=red>SetTrap</color>"); return gameBoard.trapSetChance[Random.Range(0, gameBoard.trapSetChance.Count)];}
+		//If AI Doesn't Go First play defense
+		if(GMO.AIFirst == false){
+			Debug.Log ("<Color=red>Player First</Color>");
+			if (gameBoard.trapToStop != null)
+				if(gameBoard.trapToStop.GetComponent<SlotScript>().player == 0){ 
+					Debug.Log ("<color=red>PreventTrap Returning :!</color>" + gameBoard.trapToStop.name);
+					return gameBoard.trapToStop;
+				}//trapStopChance[Random.Range(0, gameBoard.trapStopChance.Count)];}
+			if (gameBoard.trapToStart != null)
+				if(gameBoard.trapToStart.GetComponent<SlotScript>().player == 0) {
+					Debug.Log ("<color=red>SetTrap</color>"); 
+					return gameBoard.trapToStart;
+				}
+		}
+		else{//else if AI goes first play offense. Not sure for how many turns to play offense yet or what effect offense will have late game. 
+			Debug.Log ("<Color=red>AI First</Color>");
+			if (gameBoard.trapToStart != null)
+				if(gameBoard.trapToStart.GetComponent<SlotScript>().player == 0) {
+					Debug.Log ("<color=red>SetTrap</color>"); 
+					return gameBoard.trapToStart;
+				}
+			if (gameBoard.trapToStop != null)
+				if(gameBoard.trapToStop.GetComponent<SlotScript>().player == 0){ 
+					Debug.Log ("<color=red>PreventTrap Returning :!</color>" + gameBoard.trapToStop.name);
+					return gameBoard.trapToStop;
+				}//trapStopChance[Random.Range(0, gameBoard.trapStopChance.Count)];}
+		}
 		return null;
 
 	}
-	void setTrap(){
 
-		//SetTrap
-		//if(gameBoard.trapSetChance.Count > 0) {
-		//	Debug.Log ("<color=red>SetTrap</color>"); return gameBoard.trapSetChance[Random.Range(0, gameBoard.trapSetChance.Count)];}
-	}
 	bool CheckFor2InARow(Vector2[] coords){
 		int p1inRow = 0;
 		int p2inRow = 0;
@@ -667,7 +685,8 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			//we found an empty slot in this row
 			if(p2inRow == 2){
 				//There are 2 O's in a row with an empty slot
-				gameBoard.trapSetChance.Add (slot);
+				//gameBoard.trapSetChance.Add (slot);
+				gameBoard.trapToStart = slot;
 				return false;
 			}
 			else if(p1inRow == 2){

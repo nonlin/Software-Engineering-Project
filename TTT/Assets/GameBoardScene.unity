@@ -822,7 +822,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: .305434167, g: .304552346, b: .316176474, a: 0}
+  m_BackGroundColor: {r: .177689865, g: .128946811, b: .33088237, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
@@ -2081,6 +2081,7 @@ MonoBehaviour:
   BlockChance: []
   WinChance: []
   trapToStop: {fileID: 0}
+  trapToStart: {fileID: 0}
   trapSetChance: []
   trapStopChance: []
   openCol: []
