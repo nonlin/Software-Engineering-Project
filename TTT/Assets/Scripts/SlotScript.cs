@@ -345,8 +345,18 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			
 			gameBoard.gameOver = true;
 			Debug.Log ("Player " + slot.GetComponent<SlotScript>().player + " Won!");
-			//Since AI is always palyer 2 if the last winning slot is the AI half the score
-			if(slot.GetComponent<SlotScript>().player ==  2){
+			//Since AI is always palyer 2 if the last winning slot is the AI Check how many moves have past
+			//The quicker the game the higher the penality
+			if(slot.GetComponent<SlotScript>().player ==  2 && gameBoard.moves <= 5){
+				Debug.Log ("<color=red>QuickMatch1:</color>" + gameBoard.moves);
+				gameBoard.totalScore = (int)gameBoard.totalScore/4;
+			}
+			else if(slot.GetComponent<SlotScript>().player ==  2 && gameBoard.moves <= 10 && gameBoard.moves > 5){
+				Debug.Log ("<color=red>QuickMatch2:</color>" + gameBoard.moves);
+				gameBoard.totalScore = (int)gameBoard.totalScore/3;
+			}
+			else if(slot.GetComponent<SlotScript>().player ==  2 && gameBoard.moves <= 15 && gameBoard.moves > 10){
+				Debug.Log ("<color=red>QuickMatch3:</color>" + gameBoard.moves);
 				gameBoard.totalScore = (int)gameBoard.totalScore/2;
 			}
 			gameBoard.ShowWinnerPrompt ();
