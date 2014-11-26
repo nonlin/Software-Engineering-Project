@@ -3251,6 +3251,22 @@ Prefab:
       propertyPath: m_Pivot.y
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 19499b119f8e84d48b9ac2e8cfdc9c98, type: 2}
+      propertyPath: winSouhd
+      value: 
+      objectReference: {fileID: 8300000, guid: 6e2fb1f4f4acace4eae516f23113e158, type: 3}
+    - target: {fileID: 11400000, guid: 19499b119f8e84d48b9ac2e8cfdc9c98, type: 2}
+      propertyPath: First
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 19499b119f8e84d48b9ac2e8cfdc9c98, type: 2}
+      propertyPath: AIFirst
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 19499b119f8e84d48b9ac2e8cfdc9c98, type: 2}
+      propertyPath: winSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 6e2fb1f4f4acace4eae516f23113e158, type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 19499b119f8e84d48b9ac2e8cfdc9c98, type: 2}
   m_RootGameObject: {fileID: 1791899115}
@@ -6111,6 +6127,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audio1: {fileID: 1791899116}
   audio2: {fileID: 1791899119}
+  winSound: {fileID: 8300000, guid: 6e2fb1f4f4acace4eae516f23113e158, type: 3}
   ButtonSelect: {fileID: 8300000, guid: 1c7115e7172f60d43a6a8f4898c26988, type: 3}
   effectVol: 1
   aiDiffID: 0

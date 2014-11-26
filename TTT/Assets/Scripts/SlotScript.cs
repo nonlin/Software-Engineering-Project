@@ -344,6 +344,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		if (CheckForWin (slot)) {
 			
 			gameBoard.gameOver = true;
+			GMO.winSoundChime();
 			Debug.Log ("Player " + slot.GetComponent<SlotScript>().player + " Won!");
 			//Since AI is always palyer 2 if the last winning slot is the AI Check how many moves have past
 			//The quicker the game the higher the penality
@@ -364,6 +365,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			return;
 		} else if (gameBoard.moves >= 24) {
 			gameBoard.gameOver = true;
+			GMO.winSoundChime();
 			Debug.Log ("TIE!");
 			gameBoard.ShowStaleMatePrompt ();
 			//This is how to call IEnumerators to have delayed functions
@@ -638,16 +640,17 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		//If AI Doesn't Go First play defense
 		if(GMO.AIFirst == false){
 			Debug.Log ("<Color=red>Player First</Color>");
+			if (gameBoard.trapToStart != null)
+			if(gameBoard.trapToStart.GetComponent<SlotScript>().player == 0) {
+				Debug.Log ("<color=red>SetTrap</color>"); 
+				return gameBoard.trapToStart;
+			}
 			if (gameBoard.trapToStop != null)
 				if(gameBoard.trapToStop.GetComponent<SlotScript>().player == 0){ 
 					Debug.Log ("<color=red>PreventTrap Returning :!</color>" + gameBoard.trapToStop.name);
 					return gameBoard.trapToStop;
 				}//trapStopChance[Random.Range(0, gameBoard.trapStopChance.Count)];}
-			if (gameBoard.trapToStart != null)
-				if(gameBoard.trapToStart.GetComponent<SlotScript>().player == 0) {
-					Debug.Log ("<color=red>SetTrap</color>"); 
-					return gameBoard.trapToStart;
-				}
+
 		}
 		else{//else if AI goes first play offense. Not sure for how many turns to play offense yet or what effect offense will have late game. 
 			Debug.Log ("<Color=red>AI First</Color>");

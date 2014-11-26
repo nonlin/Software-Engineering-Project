@@ -5,6 +5,7 @@ public class GameMaster : MonoBehaviour {
 
 	public AudioSource audio1;
 	public AudioSource audio2;
+	public AudioClip winSound;
 	public AudioClip ButtonSelect;
 	public float effectVol = 1.0f;
 	public int aiDiffID = 0;
@@ -47,5 +48,10 @@ public class GameMaster : MonoBehaviour {
 	}
 	public void setAIFirst(bool NPCFirst){
 		AIFirst = NPCFirst;
+	}
+
+	public void winSoundChime(){
+
+		audio2.PlayOneShot(winSound,effectVol);
 	}
 }
