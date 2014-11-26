@@ -26,7 +26,7 @@ GameObject:
   - 15: {fileID: 1500000}
   - 12: {fileID: 1200000}
   - 26: {fileID: 2600000}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: FX_Rain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,8 +72,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100002}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 6.47943068, y: 12.9590292, z: 6.47943306}
+  m_LocalPosition: {x: 0, y: 0, z: -12.4099998}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 400000}
   m_RootOrder: 0
@@ -107,15 +107,15 @@ ParticleAnimator:
     rgba: 4294052142
   colorAnimation[3]:
     serializedVersion: 2
-    rgba: 4288415494
+    rgba: 4294352306
   colorAnimation[4]:
     serializedVersion: 2
     rgba: 4294940557
   worldRotationAxis: {x: 0, y: 0, z: 0}
   localRotationAxis: {x: 0, y: 0, z: 0}
-  sizeGrow: 9.35999966
+  sizeGrow: 2.04999995
   rndForce: {x: 2, y: 2, z: 2}
-  force: {x: 2, y: -5, z: 0}
+  force: {x: 2, y: -10, z: -5}
   damping: 1
   stopSimulation: 0
   autodestruct: 0
@@ -128,10 +128,10 @@ ParticleAnimator:
   Does Animate Color?: 1
   colorAnimation[0]:
     serializedVersion: 2
-    rgba: 4294967295
+    rgba: 4279177183
   colorAnimation[1]:
     serializedVersion: 2
-    rgba: 2801795071
+    rgba: 2787912916
   colorAnimation[2]:
     serializedVersion: 2
     rgba: 2583691263
@@ -158,23 +158,23 @@ EllipsoidParticleEmitter:
   serializedVersion: 2
   m_Enabled: 1
   m_Emit: 1
-  minSize: .119999997
-  maxSize: .189999998
-  minEnergy: 1
-  maxEnergy: 1
-  minEmission: 1
-  maxEmission: 1
+  minSize: .200000003
+  maxSize: .300000012
+  minEnergy: 3
+  maxEnergy: 4
+  minEmission: 100
+  maxEmission: 200
   worldVelocity: {x: 0, y: -10, z: 0}
   localVelocity: {x: 0, y: 0, z: 0}
   rndVelocity: {x: 0, y: -5, z: 0}
   emitterVelocityScale: .0500000007
-  tangentVelocity: {x: 0, y: 0, z: 0}
+  tangentVelocity: {x: 100, y: 5, z: -5}
   angularVelocity: 0
   rndAngularVelocity: 0
   rndRotation: 0
   Simulate in Worldspace?: 1
   m_OneShot: 0
-  m_Ellipsoid: {x: 657.210022, y: 110.099998, z: -530.900024}
+  m_Ellipsoid: {x: 500, y: 197.899994, z: -530.900024}
   m_MinEmitterRange: 0
 --- !u!15 &1500002
 EllipsoidParticleEmitter:
@@ -196,12 +196,12 @@ EllipsoidParticleEmitter:
   rndVelocity: {x: .100000001, y: 0, z: .100000001}
   emitterVelocityScale: .0500000007
   tangentVelocity: {x: 0, y: 0, z: 0}
-  angularVelocity: 0
+  angularVelocity: .75
   rndAngularVelocity: 0
   rndRotation: 0
   Simulate in Worldspace?: 1
   m_OneShot: 0
-  m_Ellipsoid: {x: 10, y: 0, z: 10}
+  m_Ellipsoid: {x: 12.0100002, y: 4.48000002, z: 10}
   m_MinEmitterRange: 0
 --- !u!26 &2600000
 ParticleRenderer:
@@ -228,7 +228,7 @@ ParticleRenderer:
   m_StretchParticles: 3
   m_LengthScale: 2
   m_VelocityScale: .0500000007
-  m_MaxParticleSize: 1
+  m_MaxParticleSize: .100000001
   UV Animation:
     x Tile: 1
     y Tile: 1
