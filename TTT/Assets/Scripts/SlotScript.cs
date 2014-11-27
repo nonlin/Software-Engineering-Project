@@ -575,17 +575,12 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		CheckFor2InARow(new Vector2[] {new Vector2(3,0),new Vector2(2,1),new Vector2(1,2),});
 		CheckFor2InARow(new Vector2[] {new Vector2(4,1),new Vector2(3,2),new Vector2(2,3),});
 		//Diag Check Corner Strategy
-		CheckFor2InARow(new Vector2[] {new Vector2(2,3),new Vector2(1,3),new Vector2(1,2),});
-		CheckFor2InARow(new Vector2[] {new Vector2(2,1),new Vector2(1,1),new Vector2(1,2),});
-		CheckFor2InARow(new Vector2[] {new Vector2(3,2),new Vector2(3,1),new Vector2(2,1),});
-		CheckFor2InARow(new Vector2[] {new Vector2(3,2),new Vector2(3,3),new Vector2(2,3),});
-		/*for(int i = 0; i < 5; i++){
-			Debug.Log ("<color=green>Row/COl</color>");
-			//Col
-			CheckFor2InARow(new Vector2[] {new Vector2(i,1),new Vector2(i,2),new Vector2(i,3),});
-			//Row
-			CheckFor2InARow(new Vector2[] {new Vector2(1,i),new Vector2(2,i),new Vector2(3,i),});
-		/*}*/
+		//Use if loops to prevent setting traps with this logic. To risky. 
+		if(!CheckFor2InARow (new Vector2[] {new Vector2 (2, 3),new Vector2 (1, 3),new Vector2 (1, 2),})){ gameBoard.trapToStart = null;}
+		if(!CheckFor2InARow (new Vector2[] {new Vector2 (2, 1),new Vector2 (1, 1),new Vector2 (1, 2),})){ gameBoard.trapToStart = null;}
+		if(!CheckFor2InARow (new Vector2[] {new Vector2 (3, 2),new Vector2 (3, 1),new Vector2 (2, 1),})){ gameBoard.trapToStart = null;}
+		if(!CheckFor2InARow (new Vector2[] {new Vector2 (3, 2),new Vector2 (3, 3),new Vector2 (2, 3),})){ gameBoard.trapToStart = null;}
+
 
 		
 		//Other Diag Trap
@@ -649,7 +644,7 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 				if(gameBoard.trapToStop.GetComponent<SlotScript>().player == 0){ 
 					Debug.Log ("<color=red>PreventTrap Returning :!</color>" + gameBoard.trapToStop.name);
 					return gameBoard.trapToStop;
-				}//trapStopChance[Random.Range(0, gameBoard.trapStopChance.Count)];}
+				}
 
 		}
 		else{//else if AI goes first play offense. Not sure for how many turns to play offense yet or what effect offense will have late game. 
@@ -697,13 +692,10 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 			
 			//we found an empty slot in this row
 			if(p2inRow == 2){
-				//There are 2 O's in a row with an empty slot
-				//gameBoard.trapSetChance.Add (slot);
 				gameBoard.trapToStart = slot;
 				return false;
 			}
 			else if(p1inRow == 2){
-				//gameBoard.trapStopChance.Add (slot);
 				gameBoard.trapToStop = slot; 
 				Debug.Log ("<color=red>WE Made it to trapslot is :!</color>" + gameBoard.trapToStop.name);
 				return true;
