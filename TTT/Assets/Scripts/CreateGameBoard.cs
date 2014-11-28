@@ -66,24 +66,15 @@ public class CreateGameBoard : MonoBehaviour {
 				slot.GetComponent<SlotScript>().x = x;
 				slot.GetComponent<SlotScript>().y = y;
 
-				slot.name = slotAmount.ToString();// + ":Slot" + i + "-" + j;
-				//Debug.Log (slot.name);
-				//slotsO.Add(new GamePiece());//Might not need
+				slot.name = slotAmount.ToString();
 				GamePieceList.Add(new GamePiece());
 				aGrid[x,y] = slot;
-				//Debug.Log (aGrid[x,y].name);
 				slot.transform.SetParent(this.gameObject.transform);
-				//slot.transform.parent = this.gameObject.transform;//Make it a child of this game object
 				slot.GetComponent<RectTransform>().localPosition = new Vector3(xPos - (x*103),yPos - (y*103),0);
 				slotAmount++;
 			}
 
 		}
-
-	}
-	
-	// Update is called once per frame
-	void Update () {
 
 	}
 
@@ -150,7 +141,6 @@ public class CreateGameBoard : MonoBehaviour {
 		//Save Winners Score
 		PlayerPrefs.SetString ("Score", totalScore.ToString());
 		PlayerPrefs.Save ();
-		//Debug.Log ("<color=white> SCORETEXT </color>" + totalScore);
 		scoreText.text = totalScore.ToString ();
 	}
 }

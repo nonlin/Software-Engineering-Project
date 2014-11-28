@@ -51,12 +51,7 @@ public class ScoreInput : MonoBehaviour {
 					Score = oldScore.ToString();
 					name = oldName;
 				}
-				//else {
-				//	Debug.Log("Parsing failed");
-				//	Debug.Log(split[1]+", "+split[1].Length);
-				//}
 			}
-			//else if we don't have an entry at EntryLocation:i, insert it? 
 			else{
 
 				Debug.Log ("<color=blue> Saving Else: </color>" + name + " " + Score + ":" + i);
@@ -65,19 +60,6 @@ public class ScoreInput : MonoBehaviour {
 				Score = "0";
 				name = "-";
 			}
-
 		}
-	
-}
-
-
-
-	/*public void SetGameScore(int score){
-
-		Score = score.ToString ();
-		PlayerPrefs.SetString ("Score", Score);
-		PlayerPrefs.Save ();
-
-	}*/
-
+	}
 }

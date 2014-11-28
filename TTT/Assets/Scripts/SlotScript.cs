@@ -87,7 +87,8 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 		    GetPlayerSlotID(slotCS.x,2) == (gameBoard.currentPlayer) && 
 		    GetPlayerSlotID(slotCS.x,3) == (gameBoard.currentPlayer) && 
 		    (GetPlayerSlotID(slotCS.x,4) == (gameBoard.currentPlayer) || 
-		 GetPlayerSlotID(slotCS.x,0) == (gameBoard.currentPlayer))){
+		 	GetPlayerSlotID(slotCS.x,0) == (gameBoard.currentPlayer))){
+
 			Debug.Log ("Col Sat" + gameBoard.currentPlayer);
 			HighlightWin(1,slot);
 			
@@ -382,13 +383,10 @@ public class SlotScript : MonoBehaviour, IPointerDownHandler {
 	
 	void ScoreSystem(){
 		
-		//Debug.Log ("<color = red>Enter Score System</color>");
-		
 		if (gameBoard.moves >= 4 && gameBoard.totalScore != 0) {
 			
 			gameBoard.totalScore = gameBoard.totalScore-(gameBoard.difficultyX * 225);
 			Debug.Log ("<color=red>Your Score is </color>" + gameBoard.totalScore);
-			//scoreInput.SetGameScore(gameBoard.totalScore);
 		}
 	}
 	

@@ -7,9 +7,10 @@ public class Typer : MonoBehaviour {
 	public Text textComp;
 	public AudioClip keyEnter;
 	private ScoreSystem ScoreToggle;
+	private GameMaster GMO;
 	// Use this for initialization
 	void Start () {
-
+		GMO = GameObject.FindGameObjectWithTag ("GameMaster").GetComponent<GameMaster>();
 		ScoreToggle = GameObject.FindGameObjectWithTag ("ScorePrompt").GetComponent<ScoreSystem>();
 	}
 	
@@ -32,7 +33,8 @@ public class Typer : MonoBehaviour {
 		//yield return new WaitForSeconds(3);
 		//DestroyObject(GameObject.FindGameObjectWithTag("GameMaster"));
 		//Allow Winner to enter name for score recrod
-		ScoreToggle.ShowScorePrompt ();
+		if(GMO.aiDiffID > 0)
+			ScoreToggle.ShowScorePrompt ();
 		//Wait for them to hit enter
 		yield return StartCoroutine(WaitForKeyDown(KeyCode.Return));
 		//Return to main menu

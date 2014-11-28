@@ -447,7 +447,7 @@ ParticleSystem:
         rgba: 3323994322
       minMaxState: 0
     startSize:
-      scalar: 1
+      scalar: 1.5
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1512,7 +1512,7 @@ GameObject:
   - 222: {fileID: 355586815}
   - 114: {fileID: 355586814}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
