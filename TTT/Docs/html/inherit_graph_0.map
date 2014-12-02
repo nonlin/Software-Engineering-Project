@@ -1,0 +1,16 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$class_button_behavior.html" title="ButtonBehavior" alt="" coords="207,5,316,32"/>
+<area shape="rect" id="node3" href="$class_game_board_scene.html" title="GameBoardScene" alt="" coords="197,56,325,83"/>
+<area shape="rect" id="node4" href="$class_slot_script.html" title="SlotScript" alt="" coords="222,107,301,133"/>
+<area shape="rect" id="node6" href="$class_menu_manager.html" title="MenuManager" alt="" coords="209,157,313,184"/>
+<area shape="rect" id="node9" href="$class_create_game_board.html" title="CreateGameBoard" alt="" coords="197,309,326,336"/>
+<area shape="rect" id="node10" href="$class_game_master.html" title="GameMaster" alt="" coords="213,360,310,387"/>
+<area shape="rect" id="node11" href="$class_generate_score_list.html" title="GenerateScoreList" alt="" coords="196,411,327,437"/>
+<area shape="rect" id="node12" href="$class_leaves_foreground.html" title="LeavesForeground" alt="" coords="198,461,325,488"/>
+<area shape="rect" id="node13" href="$class_piece_d_b.html" title="PieceDB" alt="" coords="225,512,298,539"/>
+<area shape="rect" id="node14" href="$class_score_get.html" title="ScoreGet" alt="" coords="223,563,300,589"/>
+<area shape="rect" id="node15" href="$class_score_input.html" title="ScoreInput" alt="" coords="219,613,303,640"/>
+<area shape="rect" id="node16" href="$class_score_system.html" title="ScoreSystem" alt="" coords="211,664,312,691"/>
+<area shape="rect" id="node17" href="$class_show_skin.html" title="Helper script to show what a skin actually looks like To use, throw on a GameObject and edit your ski..." alt="" coords="221,208,301,235"/>
+<area shape="rect" id="node18" href="$class_typer.html" title="Typer" alt="" coords="234,259,289,285"/>
+</map>

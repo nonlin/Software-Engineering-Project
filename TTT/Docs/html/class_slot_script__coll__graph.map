@@ -1,0 +1,4 @@
+<map id="SlotScript" name="SlotScript">
+<area shape="rect" id="node4" href="$class_create_game_board.html" title="{CreateGameBoard\n|+ slotsO\l+ GamePieceList\l+ BlockChance\l+ WinChance\l+ trapToStop\l+ trapToStart\l+ trapSetChance\l+ trapStopChance\l+ openCol\l+ slots\land 18 more...\l|+ AddPiece()\l+ ShowWinnerPrompt()\l+ ShowStaleMatePrompt()\l+ Quit()\l}" alt="" coords="87,160,261,428"/>
+<area shape="rect" id="node6" href="$class_game_piece.html" title="{GamePiece\n|+ gamePieceName\l+ gamePieceID\l+ gamePieceIcon\l+ gamePieceModel\l+ pieceType\l|+ GamePiece()\l+ GamePiece()\l}" alt="" coords="452,219,587,369"/>
+</map>
