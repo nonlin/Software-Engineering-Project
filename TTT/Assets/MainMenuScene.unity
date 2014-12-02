@@ -633,7 +633,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Final 1.0
+  m_Text: Final 1.0.1
 --- !u!222 &151238036
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2103,7 +2103,7 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 728595055}
-  m_LocalRotation: {x: .0314107463, y: 4.20455621e-07, z: 4.20455621e-07, w: .999506593}
+  m_LocalRotation: {x: 1.88626865e-13, y: 4.34311943e-07, z: 4.34311943e-07, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: .899999976}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2114,7 +2114,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: .600000024, y: -84.1999969}
-  m_SizeDelta: {x: 302.299988, y: 123.699997}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &728595057
 MonoBehaviour:
